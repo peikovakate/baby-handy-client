@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
+import ChatBot from "./components/Chatbot"
 
 class App extends Component {
   render() {
     return (
-      <div>This is baby-handy app</div>
+      <div>
+        <p>This is baby-handy app</p>
+        <ChatBot/>
+      </div>
+
     );
   }
 }
