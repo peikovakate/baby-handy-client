@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import ChatBot from "./components/Chatbot"
+import ChatBot from "./components/ChatbotComponent"
 
 class App extends Component {
   render() {

@@ -1,7 +1,7 @@
 import React from "react"
 
-const ChatBot = props => (
+const ChatBotComponent = props => (
     <div>This is a chat bot component</div>
 );
 
-export default ChatBot
+export default ChatBotComponent
