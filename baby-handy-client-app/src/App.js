@@ -9,7 +9,6 @@ class App extends Component {
         <p>This is baby-handy app </p>
         <ChatBot/>
       </div>
-
     );
   }
 }

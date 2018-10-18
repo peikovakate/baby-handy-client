@@ -1,5 +1,6 @@
 import React from "react"
 import ChatBot from 'react-simple-chatbot';
+import ServerMessege from './ServerMessege'
 
 const chat_bot_steps=[
     {
@@ -10,11 +11,16 @@ const chat_bot_steps=[
     {
       id: '2',
       component: (
-        <div> This is a example component </div>
+        <ServerMessege messege_text='Some text from server'/>
       ),
+      trigger: '3',
       asMessage: true,
-      end: true,
     },
+    {
+        id: '3',
+        user: true,
+        trigger: '2',
+      },
   ]
 
 const ChatBotComponent = props => (
