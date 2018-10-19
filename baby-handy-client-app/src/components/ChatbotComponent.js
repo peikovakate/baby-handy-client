@@ -1,34 +1,31 @@
-import React from "react"
-import ChatBot from 'react-simple-chatbot';
-import ServerMessege from './ServerMessege'
+import React, { Component } from 'react';
+import { Widget, addResponseMessage } from 'react-chat-widget';
+import 'react-chat-widget/lib/styles.css';
 
-const chat_bot_steps=[
-    {
-      id: '1',
-      message: 'You can here add custom components',
-      trigger: '2',
-    },
-    {
-      id: '2',
-      component: (
-        <ServerMessege messege_text='Some text from server'/>
-      ),
-      trigger: '3',
-      asMessage: true,
-    },
-    {
-        id: '3',
-        user: true,
-        trigger: '2',
-      },
-  ]
+class ChatBotComponent extends Component {
+  componentDidMount() {
+    addResponseMessage("Welcome to this awesome chat!");
+  }
+ 
+  handleNewUserMessage = (newMessage) => {
+    console.log(`New message incomig! ${newMessage}`);
+    // Now send the message throught the backend API
+    let response = 'some response from server'
+    addResponseMessage(response);
+  } 
 
-const ChatBotComponent = props => (
-    <div>
-        <p>This is a chat bot component</p>
-        <ChatBot steps = {chat_bot_steps}/>
-    </div>
-);
+
+  render() {
+    return (
+      <div className="App">
+        <p>Here is a chat</p>
+      <Widget
+          handleNewUserMessage={this.handleNewUserMessage}
+        />
+      </div>
+    );
+  }
+}
 
 export default ChatBotComponent
 
