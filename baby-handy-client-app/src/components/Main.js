@@ -4,6 +4,7 @@ import Home from './Home'
 import About from './About'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
+import AddChild from './AddChild'
 
 
 const Main = props => (
@@ -13,6 +14,7 @@ const Main = props => (
             <Route path='/about' component={About}/>
             <Route path='/signin' component={SignIn}/>
             <Route path='/signup' component={SignUp}/>
+            <Route path='/addchild' component={AddChild}/>
         </Switch>
     </main>
 );
