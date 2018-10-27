@@ -1,16 +1,17 @@
 import React from "react"
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 // Header, some panel will be here
 const Header = props => (
   <header>
     <nav>
-      <ul>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/about'>About</Link></li>
-        <li><Link to='/signin'>Sign In</Link></li>
-        <li><Link to='/signup'>Sign Up</Link></li>
-        <li><Link to='/addchild'>Add child</Link></li>
+      <ul className='right'>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/about'>About</NavLink></li>
+        <li><NavLink to='/signin'>Sign In</NavLink></li>
+        <li><NavLink to='/signup'>Sign Up</NavLink></li>
+        <li><NavLink to='/addchild'>Add child</NavLink></li>
+        <li><NavLink to='/' className='btn btn-floating grey'>NN</NavLink></li>
       </ul>
     </nav>
   </header>
