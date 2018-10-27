@@ -1,5 +1,7 @@
 import React, {Component} from "react"
 
+// TODO: add valid date picker
+
 class AddChild extends Component{
 
     state = {
@@ -27,11 +29,13 @@ class AddChild extends Component{
                         <label  htmlFor="firstName">Name</label>
                         <input type="text" id="firstName" onChange={this.handleChange}/>
                     </div>
-                    <div>
+                    
+                    <div className="input-field">
+                        <label  htmlFor="firstName">Birth date</label>
                         <input type="text" className="datepicker"/>
                     </div>
                     <div className="input-field">
-                        <button className="btn waves-effect waves-light" >SignUp</button>
+                        <button className="btn waves-effect waves-light" >Add child</button>
                     </div>
                  </form>
              </div>
