@@ -5,6 +5,7 @@ import About from './About'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 import AddChild from './AddChild'
+import ChildList from './ChildList'
 
 
 const Main = props => (
@@ -15,6 +16,7 @@ const Main = props => (
             <Route path='/signin' component={SignIn}/>
             <Route path='/signup' component={SignUp}/>
             <Route path='/addchild' component={AddChild}/>
+            <Route path='/childlist' component={ChildList}/>
         </Switch>
     </main>
 );

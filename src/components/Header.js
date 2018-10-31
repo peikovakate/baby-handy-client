@@ -11,6 +11,7 @@ const Header = props => (
         <li><NavLink to='/signin'>Sign In</NavLink></li>
         <li><NavLink to='/signup'>Sign Up</NavLink></li>
         <li><NavLink to='/addchild'>Add child</NavLink></li>
+        <li><NavLink to='/childlist'>Child List</NavLink></li>
         <li><NavLink to='/' className='btn btn-floating grey'>NN</NavLink></li>
       </ul>
     </nav>
