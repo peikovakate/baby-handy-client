@@ -1,6 +1,8 @@
 import React, {Component} from "react"
 import axios from 'axios'
 import api from '../api'
+import ChatBot from './ChatbotComponent'
+        
 
 class ChildList extends Component {
     state = {
@@ -8,18 +10,18 @@ class ChildList extends Component {
     }
 
     componentDidMount(){
-        axios.get(`{api.api}/`)
-        .then(res => {
-            console.log(res);
-            this.setState({children: res.data})
-        })
+    
     }
     
     render(){
         return(
-            <ul>
-                {this.state.children.map(children=><li>{children.name}</li>) }
-            </ul>
+            <div>
+                <ul>
+                    {this.state.children.map(children=><li>{children.name}</li>) }
+                </ul>
+                <ChatBot/>
+            </div>
+
         )
     }
 

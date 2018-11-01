@@ -20,10 +20,12 @@ class SignIn extends Component{
         console.log(this.state)
         axios.post(`${api.api}/login/`, this.state)
         .then(res => {
-            console.log('got some result')
             console.log(res);
+            alert(res.data.message)
+            this.props.history.push('/ChildList')
         }).catch(reason =>{
-            console.log(`Error: ${reason}`)
+            alert(reason)
+            console.log(`Got an error: ${reason}`)
         })
 
     }

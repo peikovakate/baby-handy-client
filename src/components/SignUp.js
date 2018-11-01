@@ -1,11 +1,15 @@
 import React, {Component} from "react"
+import axios from 'axios'
+import api from '../api'
 
 class SignUp extends Component{
     state = {
         email: '',
         password: '',
         firstName: '',
-        lastName: ''
+        lastName: '',
+        lang: 'est',
+        username: ''
     }
 
     handleChange = (e) => {
@@ -17,6 +21,15 @@ class SignUp extends Component{
     handleSubmit = (e) => {
         e.preventDefault();
         console.log(this.state )
+        axios.post(`${api.api}/parent/`, this.state)
+        .then(res => {
+            console.log(res);
+            alert(res.data.message)
+            this.props.history.push('/signin')
+        }).catch(reason =>{
+            alert(reason)
+            console.log(`Got an error: ${reason}`)
+        })
     }
 
     render(){
@@ -31,6 +44,10 @@ class SignUp extends Component{
                     <div className ="input-field">
                         <label  htmlFor='password'>Password</label>
                         <input type="password" id="password" onChange={this.handleChange}/>
+                    </div>
+                    <div className ="input-field">
+                        <label  htmlFor='username'>Username</label>
+                        <input type="text" id="username" onChange={this.handleChange}/>
                     </div>
                     <div className ="input-field">
                         <label  htmlFor='lastName'>Last Name</label>
