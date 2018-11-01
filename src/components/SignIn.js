@@ -2,6 +2,7 @@ import React, {Component} from "react"
 import api from '../api';
 import axios from 'axios'
 
+
 class SignIn extends Component{
     state = {
         email: '',
@@ -17,9 +18,12 @@ class SignIn extends Component{
     handleSubmit = (e) => {
         e.preventDefault();
         console.log(this.state)
-        axios.post('http://127.0.0.1:8000/login', this.state)
+        axios.post(`${api.api}/login/`, this.state)
         .then(res => {
+            console.log('got some result')
             console.log(res);
+        }).catch(reason =>{
+            console.log(`Error: ${reason}`)
         })
 
     }

@@ -6,7 +6,7 @@ class AddChild extends Component{
 
     state = {
         name: '',
-        
+        birthday: ''
     }
 
     handleChange = (e) => {
