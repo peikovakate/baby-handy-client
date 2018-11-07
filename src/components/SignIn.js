@@ -21,7 +21,7 @@ class SignIn extends Component{
         axios.post(`${api.api}/login/`, this.state)
         .then(res => {
             console.log(res);
-            alert(res.data.message)
+            // alert(res.data.message)
             this.props.history.push('/ChildList')
         }).catch(reason =>{
             alert(reason)
