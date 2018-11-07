@@ -2,7 +2,7 @@ import React from "react"
 import { NavLink } from 'react-router-dom'
 
 // Header, some panel will be here
-const Header = props => (
+export const Header = props => (
   <header>
     <nav>
       <ul className='right'>
@@ -18,4 +18,4 @@ const Header = props => (
   </header>
 );
 
-export default Header
+// export default Header
