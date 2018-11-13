@@ -16,8 +16,10 @@ class SignUp extends Component{
                 lastName: '',
                 lang: 'est',
                 username: ''
+
             },
-            submitted: false
+            submitted: false,
+            errors: {}
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -37,6 +39,7 @@ class SignUp extends Component{
 
     handleSubmit(event) {
         event.preventDefault();
+         if (this.validateForm()) {
 
         this.setState({ submitted: true });
         const { user } = this.state;
@@ -46,7 +49,7 @@ class SignUp extends Component{
             dispatch(userActions.register(user));
         }
     }
-
+}
 
 
     // handleSubmit = (e) => {
@@ -62,31 +65,119 @@ class SignUp extends Component{
     //         console.log(`Got an error: ${reason}`)
     //     })
     // }
+validateForm() {
+
+      let email = this.state.user["email"];
+      let password=this.state.user["password"];
+      let firstName = this.state.user["firstName"];
+      let lastName=this.state.user["lastName"];
+      let username=this.state.user["username"];
+      let errors = {};
+      let formIsValid = true;
+     
+//first name validation
+      if (!firstName) {
+        formIsValid = false;
+        errors["firstName"] = "*Please enter your first name.";
+      }
+
+      if (typeof firstName !== "undefined") {
+        if (!firstName.match(/^[a-zA-Z]+$/)) {
+          formIsValid = false;
+          errors["firstName"] = "*Please use only letters for your first name and no spaces.";
+        }
+      }
+
+//last name validation
+        if (!lastName) {
+        formIsValid = false;
+        errors["lastName"] = "*Please enter your last name.";
+      }
+
+      if (typeof lastName !== "undefined") {
+        if (!lastName.match(/^[a-zA-Z]+$/)) {
+          formIsValid = false;
+          errors["lastName"] = "*Please use only letters for your last name and no spaces.";
+        }
+      }
+
+
+//username validation
+        if (!username) {
+        formIsValid = false;
+        errors["username"] = "*Please enter your name.";
+      }
+
+
+
+//email validation
+      if (!email) {
+        formIsValid = false;
+        errors["email"] = "*Please enter your email.";
+      }
+
+      if (typeof email !== "undefined") {
+        //regular expression for email validation
+        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        if (!pattern.test(email)) {
+          formIsValid = false;
+          errors["email"] = "*Please enter valid email.";
+        }
+      }
+
+
+//password validation
+      if (!password) {
+        formIsValid = false;
+        errors["password"] = "*Please enter your password.";
+      }
+
+      if (typeof password !== "undefined") {
+        if (!password.match(/^.*(?=.{6,})(?=.*\d).*$/)) {
+          formIsValid = false;
+          errors["password"] = "*Please enter a password longer than 6 characters and at least one digit.";
+        }
+      }
+
+
+
+      this.setState({
+        errors: errors
+      });
+      return formIsValid;
+
+
+    }
 
     render(){
         return(
              <div className='container'>
-                 <form onSubmit = {this.handleSubmit} >
+                 <form name="SignUp" onSubmit = {this.handleSubmit} >
                     <h5>Sign Up</h5>
                     <div className ="input-field">
                         <label  htmlFor='email'>Email</label>
-                        <input type="email" name="email" onChange={this.handleChange}/>
+                        <input type="text" name="email" onChange={this.handleChange} value={this.state.user.email}/>
+                     <div className="errorMsg">{this.state.errors.email}</div> 
                     </div>
                     <div className ="input-field">
                         <label  htmlFor='password'>Password</label>
-                        <input type="password" name="password" onChange={this.handleChange}/>
+                        <input type="password" name="password" onChange={this.handleChange} value={this.state.user.password}/>
+                  <div className="errorMsg">{this.state.errors.password}</div>
                     </div>
-                    <div className ="input-field">
-                        <label  htmlFor='username'>Username</label>
-                        <input type="text" name="username" onChange={this.handleChange}/>
+                  <div className ="input-field">
+                        <label  htmlFor="username">Username</label>
+                        <input type="text" name="username" onChange={this.handleChange} value={this.state.user.username}/>
+                     <div className="errorMsg">{this.state.errors.username}</div>
                     </div>
                     <div className ="input-field">
                         <label  htmlFor='lastName'>Last Name</label>
-                        <input type="text" name="lastName" onChange={this.handleChange}/>
-                    </div>
+                        <input type="text" name="lastName" onChange={this.handleChange} value={this.state.user.lastName}/>
+                        <div className="errorMsg">{this.state.errors.lastName}</div>
+                     </div>
                     <div className ="input-field">
                         <label  htmlFor="firstName">First Name</label>
-                        <input type="text" name="firstName" onChange={this.handleChange}/>
+                        <input type="text" name="firstName" onChange={this.handleChange} value={this.state.user.firstName}/>
+                     <div className="errorMsg">{this.state.errors.firstName}</div>
                     </div>
                     <div className="input-field">
                         <button className="btn waves-effect waves-light" >SignUp</button>

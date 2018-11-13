@@ -1,6 +1,5 @@
 import React from "react"
-import { NavLink } from 'react-router-dom'
-
+import { withRouter, NavLink } from 'react-router-dom'
 // component that decide what buttons to show depending on if user logged in
 class HeaderLinks extends React.Component{
   render(){
@@ -10,6 +9,7 @@ class HeaderLinks extends React.Component{
           <li><NavLink to='/addchild'>Add child</NavLink></li> 
           <li><NavLink to='/childlist'>Child List</NavLink></li> 
           <li><NavLink to='/signin'>Log Out</NavLink></li>
+
           {/* <li><NavLink to='/' className='btn btn-floating grey'>NN</NavLink></li>  */}
         </ul>);
     }else {
@@ -38,4 +38,5 @@ export class Header extends React.Component{
     )}  
 }
 
-export default Header
+export default Header;
+
