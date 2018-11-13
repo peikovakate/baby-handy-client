@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Header, SignIn, SignUp, PrivateRoute } from "./_components"
-import { Switch,Router, Route } from 'react-router-dom';
+import { Switch, Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { history } from './_helpers';
 import { alertActions } from './_actions';
@@ -25,16 +25,14 @@ class App extends Component {
 
   render() {
     const { alert } = this.props;
-    return (     
-       <Router history={history}>
-
+    return (
+      <Router history={history}>
         <div>
           <Header/>
             { alert.message &&
               <div className={`alert ${alert.type}`}>{alert.message}</div>
             }
-            
-            <div>
+            <main>
               <Switch>
                 <Route exact path='/' component={Home}/>
                 <Route path='/about' component={About}/>
@@ -43,8 +41,8 @@ class App extends Component {
                 <PrivateRoute  path='/addchild' component={AddChild}/>
                 <PrivateRoute path='/childlist' component={ChildList}/>
               </Switch>
-</div>
-            </div>
+            </main>
+        </div>
       </Router>
     );
   }
