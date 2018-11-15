@@ -32,7 +32,7 @@ class SignUp extends React.Component {
           fields["email"] = "";
           fields["lastName"] = "";
           fields["password"] = "";
-          fields["language"]= 'est',
+          fields["language"]= 'est'
           this.setState({fields:fields});
           alert("Form submitted");
       }
@@ -134,5 +134,4 @@ class SignUp extends React.Component {
     }
 }
 
-export default SignUp
 export default SignUp
