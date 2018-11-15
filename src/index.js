@@ -7,8 +7,8 @@ import {Provider} from 'react-redux'
 
 import { store } from './_helpers';
 
-import { configureFakeBackend } from './_helpers';
-configureFakeBackend();
+// import { configureFakeBackend } from './_helpers';
+// configureFakeBackend();
 
 ReactDOM.render((
     <Provider store={store}>

@@ -1,10 +1,10 @@
-import React, {Component} from "react"
+import React, { Component } from "react"
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userActions } from '../_actions';
 
-class SignUp extends Component{
-    
+class SignUp extends Component {
+
     constructor(props) {
         super(props);
 
@@ -12,11 +12,8 @@ class SignUp extends Component{
             user: {
                 email: '',
                 password: '',
-                firstName: '',
-                lastName: '',
-                lang: 'est',
-                username: ''
-
+                first_name: '',
+                lang: "eng",
             },
             submitted: false,
             errors: {}
@@ -39,151 +36,99 @@ class SignUp extends Component{
 
     handleSubmit(event) {
         event.preventDefault();
-         if (this.validateForm()) {
+        if (this.validateForm()) {
 
-        this.setState({ submitted: true });
-        const { user } = this.state;
-        const { dispatch } = this.props;
-        // TODO: add other properties to check before submiting
-        if (user.email && user.password) {
-            dispatch(userActions.register(user));
+            this.setState({ submitted: true });
+            const { user } = this.state;
+            const { dispatch } = this.props;
+            // TODO: add other properties to check before submiting
+            if (user.email && user.password) {
+                dispatch(userActions.register(user));
+            }
         }
     }
-}
 
+    validateForm() {
 
-    // handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     console.log(this.state )
-    //     axios.post(`${api.api}/parent/`, this.state)
-    //     .then(res => {
-    //         console.log(res);
-    //         alert(res.data.message)
-    //         this.props.history.push('/signin')
-    //     }).catch(reason =>{
-    //         alert(reason)
-    //         console.log(`Got an error: ${reason}`)
-    //     })
-    // }
-validateForm() {
+        let email = this.state.user["email"];
+        let password = this.state.user["password"];
+        let first_name = this.state.user["first_name"];
+        let errors = {};
+        let formIsValid = true;
 
-      let email = this.state.user["email"];
-      let password=this.state.user["password"];
-      let firstName = this.state.user["firstName"];
-      let lastName=this.state.user["lastName"];
-      let username=this.state.user["username"];
-      let errors = {};
-      let formIsValid = true;
-     
-//first name validation
-      if (!firstName) {
-        formIsValid = false;
-        errors["firstName"] = "*Please enter your first name.";
-      }
-
-      if (typeof firstName !== "undefined") {
-        if (!firstName.match(/^[a-zA-Z]+$/)) {
-          formIsValid = false;
-          errors["firstName"] = "*Please use only letters for your first name and no spaces.";
+        //first name validation
+        if (!first_name) {
+            formIsValid = false;
+            errors["first_name"] = "*Please enter your first name.";
         }
-      }
 
-//last name validation
-        if (!lastName) {
-        formIsValid = false;
-        errors["lastName"] = "*Please enter your last name.";
-      }
-
-      if (typeof lastName !== "undefined") {
-        if (!lastName.match(/^[a-zA-Z]+$/)) {
-          formIsValid = false;
-          errors["lastName"] = "*Please use only letters for your last name and no spaces.";
+        if (typeof first_name !== "undefined") {
+            if (!first_name.match(/^[a-zA-Z]+$/)) {
+                formIsValid = false;
+                errors["first_name"] = "*Please use only letters for your first name and no spaces.";
+            }
         }
-      }
 
-
-//username validation
-        if (!username) {
-        formIsValid = false;
-        errors["username"] = "*Please enter your name.";
-      }
-
-
-
-//email validation
-      if (!email) {
-        formIsValid = false;
-        errors["email"] = "*Please enter your email.";
-      }
-
-      if (typeof email !== "undefined") {
-        //regular expression for email validation
-        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-        if (!pattern.test(email)) {
-          formIsValid = false;
-          errors["email"] = "*Please enter valid email.";
+        //email validation
+        if (!email) {
+            formIsValid = false;
+            errors["email"] = "*Please enter your email.";
         }
-      }
 
-
-//password validation
-      if (!password) {
-        formIsValid = false;
-        errors["password"] = "*Please enter your password.";
-      }
-
-      if (typeof password !== "undefined") {
-        if (!password.match(/^.*(?=.{6,})(?=.*\d).*$/)) {
-          formIsValid = false;
-          errors["password"] = "*Please enter a password longer than 6 characters and at least one digit.";
+        if (typeof email !== "undefined") {
+            //regular expression for email validation
+            var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+            if (!pattern.test(email)) {
+                formIsValid = false;
+                errors["email"] = "*Please enter valid email.";
+            }
         }
-      }
 
+        //password validation
+        if (!password) {
+            formIsValid = false;
+            errors["password"] = "*Please enter your password.";
+        }
 
+        if (typeof password !== "undefined") {
+            if (!password.match(/^.*(?=.{6,})(?=.*\d).*$/)) {
+                formIsValid = false;
+                errors["password"] = "*Please enter a password longer than 6 characters and at least one digit.";
+            }
+        }
 
-      this.setState({
-        errors: errors
-      });
-      return formIsValid;
-
+        this.setState({
+            errors: errors
+        });
+        return formIsValid;
 
     }
 
-    render(){
-        return(
-             <div className='container'>
-                 <form name="SignUp" onSubmit = {this.handleSubmit} >
+    render() {
+        return (
+            <div className='container'>
+                <form name="SignUp" onSubmit={this.handleSubmit} >
                     <h5>Sign Up</h5>
-                    <div className ="input-field">
-                        <label  htmlFor='email'>Email</label>
-                        <input type="text" name="email" onChange={this.handleChange} value={this.state.user.email}/>
-                     <div className="errorMsg">{this.state.errors.email}</div> 
+                    <div className="input-field">
+                        <label htmlFor='email'>Email</label>
+                        <input type="text" name="email" onChange={this.handleChange} value={this.state.user.email} />
+                        <div className="errorMsg">{this.state.errors.email}</div>
                     </div>
-                    <div className ="input-field">
-                        <label  htmlFor='password'>Password</label>
-                        <input type="password" name="password" onChange={this.handleChange} value={this.state.user.password}/>
-                  <div className="errorMsg">{this.state.errors.password}</div>
+                    <div className="input-field">
+                        <label htmlFor='password'>Password</label>
+                        <input type="password" name="password" onChange={this.handleChange} value={this.state.user.password} />
+                        <div className="errorMsg">{this.state.errors.password}</div>
                     </div>
-                  <div className ="input-field">
-                        <label  htmlFor="username">Username</label>
-                        <input type="text" name="username" onChange={this.handleChange} value={this.state.user.username}/>
-                     <div className="errorMsg">{this.state.errors.username}</div>
-                    </div>
-                    <div className ="input-field">
-                        <label  htmlFor='lastName'>Last Name</label>
-                        <input type="text" name="lastName" onChange={this.handleChange} value={this.state.user.lastName}/>
-                        <div className="errorMsg">{this.state.errors.lastName}</div>
-                     </div>
-                    <div className ="input-field">
-                        <label  htmlFor="firstName">First Name</label>
-                        <input type="text" name="firstName" onChange={this.handleChange} value={this.state.user.firstName}/>
-                     <div className="errorMsg">{this.state.errors.firstName}</div>
+                    <div className="input-field">
+                        <label htmlFor="first_name">First Name</label>
+                        <input type="text" name="first_name" onChange={this.handleChange} value={this.state.user.first_name} />
+                        <div className="errorMsg">{this.state.errors.first_name}</div>
                     </div>
                     <div className="input-field">
                         <button className="btn waves-effect waves-light" >SignUp</button>
                     </div>
-                 </form>
-             </div>
+                </form>
+            </div>
         )
     }
 }

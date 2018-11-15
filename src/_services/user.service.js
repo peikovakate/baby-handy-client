@@ -1,6 +1,9 @@
-// import config from 'config';
-import api  from '../api'
 import { authHeader } from '../_helpers';
+
+const api = "http://127.0.0.1:8000"
+// api: 'http://localhost:3000'
+// api: '3.8.93.243'
+
 export const userService = {
     login,
     logout,
@@ -34,13 +37,15 @@ function logout() {
 }
 
 function register(user) {
+    console.log(user)
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': "application/json"
+        },
         body: JSON.stringify(user)
     };
-
-    return fetch(`${api}/users/register`, requestOptions).then(handleResponse);
+    return fetch(`${api}/users/create/`, requestOptions).then(handleResponse);
 }
 
 function register_child(child) {
@@ -53,10 +58,11 @@ function register_child(child) {
     return fetch(`${api}/users/addchild`, requestOptions).then(handleResponse);
 }
 
-
 function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
+        console.log('Data');
+        console.log(data)
         if (!response.ok) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
