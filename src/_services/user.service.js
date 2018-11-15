@@ -18,7 +18,7 @@ function login(email, password) {
         body: JSON.stringify({ email, password })
     };
 
-    return fetch(`${api}/users/authenticate`, requestOptions)
+    return fetch(`${api}/users/login/`, requestOptions)
         .then(handleResponse)
         .then(user => {
             // login successful if there's a jwt token in the response
@@ -55,7 +55,7 @@ function register_child(child) {
         body: JSON.stringify(child)
     };
 
-    return fetch(`${api}/users/addchild`, requestOptions).then(handleResponse);
+    return fetch(`${api}/child/`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {
