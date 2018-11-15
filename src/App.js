@@ -7,8 +7,8 @@ import { history } from './_helpers';
 import { alertActions } from './_actions';
 import Home from './_components/Home'
 import About from './_components/About'
-import {AddChild} from './_components/AddChild'
-import ChildList from './_components/ChildList'
+import { AddChild } from './_components/AddChild'
+import { ChildList }  from './_components/ChildList'
 
 class App extends Component {
 
