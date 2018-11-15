@@ -5,10 +5,9 @@ import { Switch, Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { history } from './_helpers';
 import { alertActions } from './_actions';
-
 import Home from './_components/Home'
 import About from './_components/About'
-import AddChild from './_components/AddChild'
+import {AddChild} from './_components/AddChild'
 import ChildList from './_components/ChildList'
 
 class App extends Component {

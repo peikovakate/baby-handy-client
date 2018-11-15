@@ -7,6 +7,7 @@ export const userActions = {
     login,
     logout,
     register,
+    register_child,
 };
 
 function login(email, password) {
@@ -58,4 +59,29 @@ function register(user) {
     function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
     function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
     function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
+}
+
+
+function register_child(child) {
+
+    return dispatch => {
+        dispatch(request(child));
+
+        userService.register_child(child)
+            .then(
+                child => { 
+                    dispatch(success());
+                    history.push('/childlist');
+                    dispatch(alertActions.success('You successfully added a child'));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request(child) { return { type: userConstants.REGISTERCHILD_REQUEST, child } }
+    function success(child) { return { type: userConstants.REGISTERCHILD_SUCCESS, child } }
+    function failure(error) { return { type: userConstants.REGISTERCHILD_FAILURE, error } }
 }

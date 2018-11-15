@@ -1,11 +1,11 @@
 // import config from 'config';
 import api  from '../api'
 import { authHeader } from '../_helpers';
-
 export const userService = {
     login,
     logout,
-    register
+    register,
+    register_child,
 };
 
 function login(email, password) {
@@ -42,6 +42,17 @@ function register(user) {
 
     return fetch(`${api}/users/register`, requestOptions).then(handleResponse);
 }
+
+function register_child(child) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(child)
+    };
+
+    return fetch(`${api}/users/addchild`, requestOptions).then(handleResponse);
+}
+
 
 function handleResponse(response) {
     return response.text().then(text => {

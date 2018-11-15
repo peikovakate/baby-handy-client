@@ -1,13 +1,12 @@
 // array in local storage for registered users
 let users = JSON.parse(localStorage.getItem('users')) || [];
-    
+let children=JSON.parse(localStorage.getItem('children')) || [];     
 export function configureFakeBackend() {
     let realFetch = window.fetch;
     window.fetch = function (url, opts) {
         return new Promise((resolve, reject) => {
             // wrap in timeout to simulate server api call
             setTimeout(() => {
-
                 // authenticate
                 if (url.endsWith('/users/authenticate') && opts.method === 'POST') {
                     // get parameters from post request
@@ -37,18 +36,8 @@ export function configureFakeBackend() {
                     return;
                 }
 
-                // get users
-                if (url.endsWith('/users') && opts.method === 'GET') {
-                    // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                    if (opts.headers && opts.headers.Authorization === 'Bearer fake-jwt-token') {
-                        resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(users))});
-                    } else {
-                        // return 401 not authorised if token is null or invalid
-                        reject('Unauthorised');
-                    }
 
-                    return;
-                }
+                
 
                 // get user by id
                 if (url.match(/\/users\/\d+$/) && opts.method === 'GET') {
@@ -93,6 +82,48 @@ export function configureFakeBackend() {
                     return;
                 }
 
+////////Add child
+                if (url.endsWith('/users/addchild') && opts.method === 'POST') {
+                    // get new user object from post body
+                    let newChild = JSON.parse(opts.body);
+
+                    // validation
+                    //Not using birthdate because they might be twins
+                    let duplicateChild = children.filter(child => { return child.name === newChild.name; }).length;
+                    if (duplicateChild) {
+                        reject('Name"' + newChild.name + '" is already registered');
+                        return;
+                    }
+
+                    // save new user
+                    newChild.id = children.length ? Math.max(...children.map(child=> child.id)) + 1 : 1;
+                    let a=JSON.parse(window.localStorage.getItem('users'));
+                    newChild.parentid=a['0'].id;
+                    children.push(newChild);
+                    localStorage.setItem('children', JSON.stringify(children));
+
+                    // respond 200 OK
+                    resolve({ ok: true, text: () => Promise.resolve() });
+
+                    return;
+                }
+
+                //Get a list of all children
+                if (url.endsWith('/children') && opts.method === 'GET') {
+                    console.log('function called')
+                    // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+                    if (opts.headers && opts.headers.Authorization === 'Bearer fake-jwt-token') {
+                        let b=JSON.parse(window.localStorage.getItem('users'));
+                    console.log(JSON.stringify('b'));
+
+                        resolve({ ok: true, text: () => Promise.resolve(JSON.stringify('b'))});
+                    } else {
+                        // return 401 not authorised if token is null or invalid
+                        reject('Unauthorised');
+                    }
+
+                    return;
+                }
                 // delete user
                 if (url.match(/\/users\/\d+$/) && opts.method === 'DELETE') {
                     // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
