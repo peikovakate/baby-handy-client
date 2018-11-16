@@ -8,7 +8,8 @@ class ChildList extends Component {
             {child_id:1, name: 'a1'},
             {child_id:2, name: 'b2'},
             {child_id:3, name: 'c3'},
-        ]
+        ],
+        active_child_id: null
     }
 
     componentDidMount(){
