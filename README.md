@@ -8,11 +8,9 @@ Client side for Baby Handy App.
   + react-chat-widget npm package
   + styled-components for react chat widget
   + materilizecss
-  + axios for promised based requests
+  + Authentification with JWT (half done)
 
 Needs some research and implementation:
-  + JWT
-  + Authentification
   + Redux
 
-Contributor: Kateryna Peikova
+Contributors: Kateryna Peikova, Salijona Dyrmishi
