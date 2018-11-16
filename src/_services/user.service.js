@@ -48,6 +48,7 @@ function register(user) {
     return fetch(`${api}/users/create/`, requestOptions).then(handleResponse);
 }
 
+// TODO: add also jwt token
 function register_child(child) {
     const requestOptions = {
         method: 'POST',
