@@ -1,5 +1,6 @@
 import React from "react"
-import { withRouter, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux';  
 // component that decide what buttons to show depending on if user logged in
 class HeaderLinks extends React.Component{
   render(){
@@ -23,8 +24,9 @@ class HeaderLinks extends React.Component{
 }
 
 // Header, some panel will be here
-export class Header extends React.Component{
+class Header extends React.Component{
   render(){
+    const { user } = this.props;
     return(
     <header>
       <nav>
@@ -38,5 +40,13 @@ export class Header extends React.Component{
     )}  
 }
 
-export default Header;
+function mapStateToProps(state) {
+  const { authentication } = state;
+  const user = authentication
+  return {
+      user
+  };
+}
 
+const connectedHeader = connect(mapStateToProps)(Header);
+export { connectedHeader as Header };
