@@ -86,19 +86,18 @@ export function configureFakeBackend() {
                 if (url.endsWith('/users/addchild') && opts.method === 'POST') {
                     // get new user object from post body
                     let newChild = JSON.parse(opts.body);
-
                     // validation
                     //Not using birthdate because they might be twins
-                    let duplicateChild = children.filter(child => { return child.name === newChild.name; }).length;
+                    let duplicateChild = children.filter(child => { return child.firstname === newChild.firstname; }).length;
                     if (duplicateChild) {
-                        reject('Name"' + newChild.name + '" is already registered');
+                        reject('Name"' + newChild.firstname + '" is already registered');
                         return;
                     }
 
                     // save new user
-                    newChild.id = children.length ? Math.max(...children.map(child=> child.id)) + 1 : 1;
-                    let a=JSON.parse(window.localStorage.getItem('users'));
-                    newChild.parentid=a['0'].id;
+                    newChild.id = children.length ? Math.max(...children.map(child => child.id)) + 1 : 1;
+                    let a = JSON.parse(window.localStorage.getItem('users'));
+                    newChild.parent_id = a['0'].id;
                     children.push(newChild);
                     localStorage.setItem('children', JSON.stringify(children));
 
