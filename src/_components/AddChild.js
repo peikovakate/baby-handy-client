@@ -74,6 +74,7 @@ class AddChild extends Component {
             const { child } = this.state;
             const { dispatch } = this.props;
             if (child.firstname && child.birthday) {
+                child.parent_id = this.props['user'].user.id
                 dispatch(userActions.register_child(child));
             }
         }
@@ -165,9 +166,10 @@ class AddChild extends Component {
     }
 }
 function mapStateToProps(state) {
-    const { register } = state.registration;
+    const { authentication } = state;
+    const user = authentication
     return {
-        register
+        user
     };
 }
 
