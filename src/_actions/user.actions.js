@@ -18,7 +18,6 @@ function login(email, password) {
             .then(
                 user => { 
                     dispatch(success(user));
-                    console.log('redirect')
                     history.push('/childlist');
                 },
                 error => {
@@ -66,13 +65,14 @@ function register_child(child) {
 
     return dispatch => {
         dispatch(request(child));
-
+        
         userService.register_child(child)
             .then(
-                child => { 
-                    dispatch(success());
+                add_child_response => { 
+                    let new_child = add_child_response.message
+                    dispatch(success(new_child));
                     history.push('/childlist');
-                    dispatch(alertActions.success('You successfully added a child'));
+                    dispatch(alertActions.success('You successfully added a child.'));
                 },
                 error => {
                     dispatch(failure(error.toString()));
