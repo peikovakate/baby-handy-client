@@ -9,6 +9,7 @@ export const userService = {
     logout,
     register,
     register_child,
+    delete: deleteChild,
 };
 
 function login(email, password) {
@@ -57,6 +58,16 @@ function register_child(child) {
     };
 
     return fetch(`${api}/child/`, requestOptions).then(handleResponse);
+}
+
+
+function deleteChild(child_id) {
+    const requestOptions = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+  };
+
+    return fetch(`${api}/delete/?child_id=${child_id}`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

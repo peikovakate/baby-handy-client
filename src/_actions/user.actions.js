@@ -8,6 +8,7 @@ export const userActions = {
     logout,
     register,
     register_child,
+    deleteChild,
 };
 
 function login(email, password) {
@@ -84,4 +85,20 @@ function register_child(child) {
     function request(child) { return { type: userConstants.REGISTERCHILD_REQUEST, child } }
     function success(child) { return { type: userConstants.REGISTERCHILD_SUCCESS, child } }
     function failure(error) { return { type: userConstants.REGISTERCHILD_FAILURE, error } }
+}
+
+function deleteChild(child_id) {
+    return dispatch => {
+        dispatch(request(child_id));
+
+        userService.delete(child_id)
+            .then(
+                message => dispatch(success(child_id)),
+                error => dispatch(failure(child_id, error.toString()))
+            );
+    };
+
+    function request(child_id) { return { type: userConstants.DELETE_REQUEST, child_id } }
+    function success(child_id) { return { type: userConstants.DELETE_SUCCESS, child_id } }
+    function failure(child_id,error) { return { type: userConstants.DELETE_FAILURE,child_id, error } }
 }

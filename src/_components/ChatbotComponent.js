@@ -10,7 +10,7 @@ class ChatBotComponent extends Component {
  
   handleNewUserMessage = (newMessage) => {
     console.log(`New message! ${newMessage}`);
-    // Now send the message throught the backend API
+    // Now send the message through the backend API
     let response = 'some response from server'
     addResponseMessage(response);
   } 
