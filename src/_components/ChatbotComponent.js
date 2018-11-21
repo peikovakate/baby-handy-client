@@ -4,7 +4,6 @@ import 'react-chat-widget/lib/styles.css';
 
 class ChatBotComponent extends Component {
   componentDidMount() {
-    this.props.onRef(this)
     // addResponseMessage("Welcome to this awesome chat!");
   }
  
@@ -17,13 +16,7 @@ class ChatBotComponent extends Component {
 
   toggleChat(){
     toggleWidget()
-    // chat.toggleWidget()
   }
-
-  componentWillUnmount() {
-    this.props.onRef(undefined)
-  }
-
 
   render() {
     return (

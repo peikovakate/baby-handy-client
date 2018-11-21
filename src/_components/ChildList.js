@@ -3,14 +3,16 @@ import { connect } from 'react-redux';
 import ChatBot from './ChatbotComponent'
 
 class ChildList extends Component {
+    constructor(props){
+        super(props);
+    }
     state = {
         active_child_id: null
     }
 
     child_btn_click(e) {
         e.preventDefault();
-        // this.chatbot.toggleChat()
-        // e.target.id - id of child
+        this.chatbot.toggleChat()
     }
 
     render() {
@@ -19,10 +21,10 @@ class ChildList extends Component {
                 <ul className="collection">
                     {this.props['user'].user.children.map(children => 
                     <a href=' ' key={children.child_id} className="collection-item" 
-                    id={children.child_id} onClick={this.child_btn_click}>
+                    id={children.child_id} onClick={this.child_btn_click.bind(this)}>
                         ID: {children.child_id}, Name: {children.name}</a>)}
                 </ul>
-                <ChatBot onRef={ref => (this.chatbot = ref)} />
+                <ChatBot ref={c => (this.chatbot = c)} />
             </div>
 
         )
