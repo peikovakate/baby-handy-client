@@ -1,4 +1,4 @@
-import { userConstants } from '../_constants';
+import { userConstants, chatbotConstants } from '../_constants';
 import { userService } from '../_services';
 import { alertActions } from './';
 import { history } from '../_helpers';
@@ -8,6 +8,7 @@ export const userActions = {
     logout,
     register,
     register_child,
+    start_conversation
 };
 
 function login(email, password) {
@@ -84,4 +85,25 @@ function register_child(child) {
     function request(child) { return { type: userConstants.REGISTERCHILD_REQUEST, child } }
     function success(child) { return { type: userConstants.REGISTERCHILD_SUCCESS, child } }
     function failure(error) { return { type: userConstants.REGISTERCHILD_FAILURE, error } }
+}
+
+function start_conversation(child_data){
+    return dispatch =>
+     userService.results(child_data).then(
+        results_response =>{
+            console.log('Res resp', results_response.message)
+            const message_array = results_response.message;
+            for (var mes in message_array){
+                dispatch(success(message_array[mes]))
+            }
+        },                
+        error => {
+            console.log('error', error)
+            
+            // dispatch(failure(error.toString()));
+            dispatch(alertActions.error(error.toString()));
+        }
+
+    )
+    function success(message) { return { type: chatbotConstants.RECEIVED_MESSAGE, message } }
 }
