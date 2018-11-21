@@ -9,6 +9,7 @@ export const userService = {
     logout,
     register,
     register_child,
+    results
 };
 
 function login(email, password) {
@@ -37,7 +38,6 @@ function logout() {
 }
 
 function register(user) {
-    console.log(user)
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -52,18 +52,26 @@ function register(user) {
 function register_child(child) {
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify(child)
     };
 
     return fetch(`${api}/child/`, requestOptions).then(handleResponse);
 }
 
+//TODO: add also jwt auth token 
+function results(child_data){
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    }
+
+    return fetch(`${api}/results/?child_id=${child_data.child_id}`, requestOptions).then(handleResponse);
+}
+
 function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
-        console.log('Data');
-        console.log(data)
         if (!response.ok) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
