@@ -1,28 +1,28 @@
-import React, {Component} from "react"
-import { connect } from 'react-redux';  
+import React, { Component } from "react"
+import { connect } from 'react-redux';
 import ChatBot from './ChatbotComponent'
-        
+
 class ChildList extends Component {
     state = {
-        children: [
-            {child_id:1, name: 'a1'},
-            {child_id:2, name: 'b2'},
-            {child_id:3, name: 'c3'},
-        ],
         active_child_id: null
     }
 
-    componentDidMount(){
-    
+    child_btn_click(e) {
+        e.preventDefault();
+        // this.chatbot.toggleChat()
+        // e.target.id - id of child
     }
-    
-    render(){
-        return(
-            <div>
-                <ul>
-                    {this.state.children.map(children=><li>ID: {children.child_id}, Name: {children.name}</li>) }
+
+    render() {
+        return (
+            <div >
+                <ul className="collection">
+                    {this.props['user'].user.children.map(children => 
+                    <a href=' ' key={children.child_id} className="collection-item" 
+                    id={children.child_id} onClick={this.child_btn_click}>
+                        ID: {children.child_id}, Name: {children.name}</a>)}
                 </ul>
-                <ChatBot/>
+                <ChatBot onRef={ref => (this.chatbot = ref)} />
             </div>
 
         )
