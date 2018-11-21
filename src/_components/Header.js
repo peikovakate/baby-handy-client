@@ -26,7 +26,6 @@ class HeaderLinks extends React.Component{
 // Header, some panel will be here
 class Header extends React.Component{
   render(){
-    const { user } = this.props;
     return(
     <header>
       <nav>
