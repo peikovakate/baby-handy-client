@@ -137,25 +137,32 @@ class AddChild extends Component {
                         <label htmlFor="name">Name</label>
                         <input type="text" name="firstname" onChange={this.handleChange} value={this.state.child.firstname} />
                         <div className="errorMsg">{this.state.errors.firstname}</div>
-
                     </div>
                     {!child.birthday && <p>Choose a day</p>}
-                    <div className="YearNavigation">
-                        <DayPickerInput
-                            name="birthday"
-                            keepFocus={true}
-                            ref={el => (this.dayPickerInput = el)}
-                            placeholder={`${formatDate(new Date(), 'DD/MM/YYYY')}`}
-                            dayPickerProps={{ disabledDays: { after: new Date() } }}
-                            formatDate={formatDate}
-                            onDayChange={this.handleDayChange}
-                            onChange={this.handleChange}
-                            value={this.state.child.birthday} />
-                    </div>
-                    <div className="errorMsg">{this.state.errors.birthday}</div>
-                    <div className="input-field">
-                        <button className="btn waves-effect waves-light" >Add child</button>
-                        {register}
+                    <div className='row'>
+                        <div className="col s3">
+                            <div className="YearNavigation">
+                                <DayPickerInput
+                                    name="birthday"
+                                    keepFocus={true}
+                                    ref={el => (this.dayPickerInput = el)}
+                                    placeholder={`${formatDate(new Date(), 'DD/MM/YYYY')}`}
+                                    dayPickerProps={{ disabledDays: { after: new Date() } }}
+                                    formatDate={formatDate}
+                                    onDayChange={this.handleDayChange}
+                                    onChange={this.handleChange}
+                                    value={this.state.child.birthday} />
+                            </div>
+
+                            <div className="errorMsg">{this.state.errors.birthday}</div>
+                        </div>
+                        <div className="col s2">
+                            <div className="input-field">
+                                <button className="btn waves-effect waves-light" >Add child</button>
+                                {register}
+                            </div>
+                        </div>
+
                     </div>
                 </form>
 
