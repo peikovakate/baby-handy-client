@@ -17,7 +17,7 @@ function login(email, password) {
 
         userService.login(email, password)
             .then(
-                user => { 
+                user => {
                     dispatch(success(user));
                     history.push('/childlist');
                 },
@@ -44,7 +44,7 @@ function register(user) {
 
         userService.register(user)
             .then(
-                user => { 
+                user => {
                     dispatch(success());
                     history.push('/signin');
                     dispatch(alertActions.success('Registration successful'));
@@ -66,10 +66,10 @@ function register_child(child) {
 
     return dispatch => {
         dispatch(request(child));
-        
+
         userService.register_child(child)
             .then(
-                add_child_response => { 
+                add_child_response => {
                     let new_child = add_child_response.message
                     dispatch(success(new_child));
                     history.push('/childlist');
@@ -93,12 +93,13 @@ function deleteChild(child_id) {
 
         userService.delete(child_id)
             .then(
-                message => dispatch(success(child_id)),
+                message => dispatch(success(child_id)),                    
+                dispatch(alertActions.success('You successfully deleted a child.')),
                 error => dispatch(failure(child_id, error.toString()))
             );
     };
 
     function request(child_id) { return { type: userConstants.DELETE_REQUEST, child_id } }
     function success(child_id) { return { type: userConstants.DELETE_SUCCESS, child_id } }
-    function failure(child_id,error) { return { type: userConstants.DELETE_FAILURE,child_id, error } }
+    function failure(child_id, error) { return { type: userConstants.DELETE_FAILURE, child_id, error } }
 }

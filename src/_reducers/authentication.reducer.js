@@ -27,6 +27,7 @@ export function authentication(state = initialState, action) {
       // add to state array of children, firstname and id of child that can be received from action object 
       // action.child should return a child object with legal (correct) properties
       console.log('Register child success')
+
       let new_state = state
       new_state.user.children.push(action.child)
       // storing updated user in local storage. Might be not right, however private routing
@@ -37,25 +38,21 @@ export function authentication(state = initialState, action) {
 
 
     case userConstants.DELETE_REQUEST:
-    return state
-   case userConstants.DELETE_SUCCESS:
-  
-   return state
-   //{...state,user:{
-           //...state.user,children:{
-   // ...state.user.children,[action.child_id]:[state.user.children.filter(child => child.child_id !== action.child_id)]
-  //}}
-  // };
-     
- // localStorage.removeItem('user', JSON.stringify(state_new.user))
-   // return state_new
-      //console.log('Deleted child success')
-      //return state
-     // const childId= action.data;
-     // let state_new=state;
-      //let user=state_new.user;
-      //let children=user.children;
+      return state
+    case userConstants.DELETE_SUCCESS:
+      console.log('Deleted child successfully')
+      let children = state.user.children;
+      //Need the index of array to be deleted to filter them
+      const childtodeleteIndex = children.findIndex(x => x.child_id == action.child_id);
 
+      let state_new = state
+      state_new = {
+        ...state_new, user: {
+          ...state_new.user, children: [...state_new.user.children.filter(item => item != state_new.user.children[childtodeleteIndex])]
+        }
+      };
+      localStorage.setItem('user', JSON.stringify(state_new.user))
+      return state_new
     case userConstants.DELETE_FAILURE:
       return state;
     default:
