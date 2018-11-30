@@ -9,7 +9,8 @@ export const userService = {
     logout,
     register,
     register_child,
-    results
+    results,
+    delete: deleteChild,
 };
 
 function login(email, password) {
@@ -69,6 +70,14 @@ function results(child_data){
     return fetch(`${api}/results/?child_id=${child_data.child_id}`, requestOptions).then(handleResponse);
 }
 
+function deleteChild(child_id) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+  };
+
+    return fetch(`${api}/delete/?child_id=${child_id}`, requestOptions).then(handleResponse);
+}
 function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);

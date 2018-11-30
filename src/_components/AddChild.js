@@ -73,6 +73,7 @@ class AddChild extends Component {
             this.setState({ submitted: true });
             const { child } = this.state;
             const { dispatch } = this.props;
+            console.log(dispatch);
             if (child.firstname && child.birthday) {
                 child.parent_id = this.props['user'].user.id
                 dispatch(userActions.register_child(child));
@@ -98,9 +99,9 @@ class AddChild extends Component {
         }
 
         if (typeof firstName !== "undefined") {
-            if (!firstName.match(/^[a-zA-Z]+$/)) {
+            if (!firstName.match(/^[a-zA-Z\s]*$/)) {
                 formIsValid = false;
-                errors["firstname"] = "*Please use only letters for your child first name and no spaces.";
+                errors["firstname"] = "*Please use only letters for your child first name.";
             }
         }
         //birthday validation

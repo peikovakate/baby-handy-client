@@ -62,9 +62,9 @@ class SignUp extends Component {
         }
 
         if (typeof first_name !== "undefined") {
-            if (!first_name.match(/^[a-zA-Z]+$/)) {
+            if (!first_name.match(/^[a-zA-Z\s]*$/)) {
                 formIsValid = false;
-                errors["first_name"] = "*Please use only letters for your first name and no spaces.";
+                errors["first_name"] = "*Please use only letters for your first name";
             }
         }
 

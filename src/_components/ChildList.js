@@ -6,11 +6,13 @@ import { userActions } from '../_actions';
 class ChildList extends Component {
     constructor(props){
         super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
         // this.user_entered_message.bind(this.chatbot.handleNewUserMessage)
     }
     state = {
 
     }
+    
 
     componentWillReceiveProps(nextProps) {
         console.log('Props CHANGED', nextProps['chatbot_state'])
@@ -26,23 +28,34 @@ class ChildList extends Component {
     }
 
     child_btn_click(e) {
+        // e.preventDefault();
+        // const child_data ={
+        //     child_id: parseInt(e.target.id)
+        // }
+
+        // // this.chatbot.toggleChat()
+        // const { dispatch } = this.props;
+        // dispatch(userActions.start_conversation(child_data));
+    }
+
+    handleSubmit(e) {
         e.preventDefault();
-        const child_data ={
-            child_id: parseInt(e.target.id)
-        }
-        // this.chatbot.toggleChat()
+        const child_id = e.target.id;
         const { dispatch } = this.props;
-        dispatch(userActions.start_conversation(child_data));
+        dispatch(userActions.deleteChild(child_id));
+
+
     }
 
     render() {
         return (
             <div >
                 <ul className="collection">
-                    {this.props['user'].user.children.map(children => 
-                    <a href=' ' key={children.child_id} className="collection-item" 
-                    id={children.child_id} onClick={this.child_btn_click.bind(this)}>
-                        ID: {children.child_id}, Name: {children.name}</a>)}
+                    {this.props['user'].user.children.map(children =>
+                        <a href=' ' key={children.child_id} className="collection-item"
+                            id={children.child_id} onClick={this.child_btn_click}>
+                            ID: {children.child_id}, Name: {children.name}  <button className="btn waves-effect waves-light" id={children.child_id} onClick={this.handleSubmit}>Delete child</button></a>)
+                    }
                 </ul>
                 <ChatBot ref={c => (this.chatbot = c)} />
             </div>
