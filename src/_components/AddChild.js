@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 import { userActions } from '../_actions';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-import MomentLocaleUtils, {
-    formatDate,
-    parseDate,
-} from 'react-day-picker/moment';
+import  { formatDate } from 'react-day-picker/moment';
 
 
 class AddChild extends Component {
@@ -82,8 +79,6 @@ class AddChild extends Component {
     }
 
     ///Form validation
-
-
     validateForm() {
 
 
