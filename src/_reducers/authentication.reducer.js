@@ -41,12 +41,12 @@ export function authentication(state = initialState, action) {
       console.log('Deleted child successfully')
       let children = state.user.children;
       //Need the index of array to be deleted to filter them
-      const childtodeleteIndex = children.findIndex(x => x.child_id === action.child_id);
+      const childtodeleteIndex = children.findIndex(x => x.child_id == action.child_id);
 
       let state_new = state
       state_new = {
         ...state_new, user: {
-          ...state_new.user, children: [...state_new.user.children.filter(item => item !== state_new.user.children[childtodeleteIndex])]
+          ...state_new.user, children: [...state_new.user.children.filter(item => item != state_new.user.children[childtodeleteIndex])]
         }
       };
       localStorage.setItem('user', JSON.stringify(state_new.user))
