@@ -10,6 +10,7 @@ export const userService = {
     register,
     register_child,
     results,
+    process_message,
     delete: deleteChild,
 };
 
@@ -49,7 +50,6 @@ function register(user) {
     return fetch(`${api}/users/create/`, requestOptions).then(handleResponse);
 }
 
-// TODO: add also jwt token
 function register_child(child) {
     const requestOptions = {
         method: 'POST',
@@ -60,14 +60,23 @@ function register_child(child) {
     return fetch(`${api}/child/`, requestOptions).then(handleResponse);
 }
 
-//TODO: add also jwt auth token 
 function results(child_data){
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
     }
-
     return fetch(`${api}/results/?child_id=${child_data.child_id}`, requestOptions).then(handleResponse);
+}
+
+function process_message(message_data) {
+    console.log('sending request to process next message')
+    const requestOptions = {
+        method: 'POST',
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
+        body: JSON.stringify(message_data)
+    }
+
+    return fetch(`${api}/processmessage/`, requestOptions).then(handleResponse);
 }
 
 function deleteChild(child_id) {
@@ -78,6 +87,7 @@ function deleteChild(child_id) {
 
     return fetch(`${api}/delete/?child_id=${child_id}`, requestOptions).then(handleResponse);
 }
+
 function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
@@ -96,3 +106,4 @@ function handleResponse(response) {
         return data;
     });
 }
+

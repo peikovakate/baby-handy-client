@@ -10,6 +10,8 @@ export const userActions = {
     register_child,
     start_conversation,
     deleteChild,
+    next_message,
+    change_child
 };
 
 function login(email, password) {
@@ -89,25 +91,31 @@ function register_child(child) {
 }
 
 function start_conversation(child_data){
-    return dispatch =>
-     userService.results(child_data).then(
-        results_response =>{
-            console.log('Res resp', results_response.message)
-            const message_array = results_response.message;
-            for (var mes in message_array){
-                dispatch(success(message_array[mes]))
+    return dispatch => {
+        dispatch(request(child_data));
+        userService.results(child_data).then(
+            results_response =>{
+                // might be returned not a array, but one string 
+                const messages = results_response.message;
+                if (Array.isArray(messages)){
+                    for (var mes in messages){
+                        dispatch(success({message: messages[mes], test_id: results_response.test_id}))
+                    }
+                }else{
+                    dispatch(success({message: messages, test_id: results_response.test_id})) 
+                }
+                
+            },                
+            error => {
+                dispatch(alertActions.error(error.toString()));
             }
-        },                
-        error => {
-            console.log('error', error)
-            
-            // dispatch(failure(error.toString()));
-            dispatch(alertActions.error(error.toString()));
-        }
 
-    )
-    function success(message) { return { type: chatbotConstants.RECEIVED_MESSAGE, message } }
+    )};
+
+    function success(response) { return { type: chatbotConstants.RECEIVED_MESSAGE, response } }
+    function request(child_data) { return { type: chatbotConstants.REQUEST_MESSAGE, child_data } }
 }
+
 function deleteChild(child_id) {
     return dispatch => {
         dispatch(request(child_id));
@@ -123,4 +131,24 @@ function deleteChild(child_id) {
     function request(child_id) { return { type: userConstants.DELETE_REQUEST, child_id } }
     function success(child_id) { return { type: userConstants.DELETE_SUCCESS, child_id } }
     function failure(child_id, error) { return { type: userConstants.DELETE_FAILURE, child_id, error } }
+}
+
+function next_message(message_data) {
+    console.log('sending next message')
+    return dispatch => {
+        console.log('sending next message yo');
+        userService.process_message(message_data).then(
+            results_response => {
+            // const message = results_response.message;
+            dispatch(success({message: results_response.message,  test_id: results_response.test_id}))
+            },                
+            error => {
+                dispatch(alertActions.error(error.toString()));
+            }
+    )};
+    function success(response) { return { type: chatbotConstants.RECEIVED_MESSAGE, response } }
+}
+
+function change_child(child_id) {
+    return { type: chatbotConstants.CHILD_CHANGED, child_id };
 }
