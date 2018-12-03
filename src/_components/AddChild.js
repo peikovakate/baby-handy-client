@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { userActions } from '../_actions';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-import  { formatDate } from 'react-day-picker/moment';
+import { formatDate } from 'react-day-picker/moment';
 
 
 class AddChild extends Component {
@@ -19,10 +19,13 @@ class AddChild extends Component {
             },
             submitted: false,
             errors: {},
+            securityCode: null,
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleChangeCode = this.handleChangeCode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSubmitCode = this.handleSubmitCode.bind(this);
         this.handleDayChange = this.handleDayChange.bind(this);
     }
 
@@ -36,6 +39,14 @@ class AddChild extends Component {
             }
         });
     }
+
+    handleChangeCode(event) {
+        console.log(event.target);
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
+
+    }
+
 
     handleDayChange(value) {
         const input = this.dayPickerInput.getInput();
@@ -76,7 +87,49 @@ class AddChild extends Component {
                 dispatch(userActions.register_child(child));
             }
         }
+}
+
+
+
+    handleSubmitCode(event) {
+        event.preventDefault();
+
+        if (this.validateSecurityCode()){
+        this.setState({ submitted: true });
+        const { dispatch } = this.props;
+        const sec_code = this.state.securityCode;
+        console.log(sec_code);
+        const parent_id = this.props['user'].user.id;
+        console.log(dispatch);
+        dispatch(userActions.useSecurityCode(sec_code, parent_id));
     }
+    }
+
+
+    validateSecurityCode() {
+
+        let SecurityCode = this.state.securityCode;
+        let errors = {}
+        let SecurityCodeIsValid = true;
+        if (!SecurityCode) {
+            SecurityCodeIsValid = false;
+            errors["securityCode"] = "*Please enter a security code";
+        }
+
+        if (typeof SecurityCode !== "undefined") {
+            if (!SecurityCode.match(/^\d{4}$/)) {
+                SecurityCodeIsValid = false;
+                errors["securityCode"] = "*Please use only 4 digits";
+            }
+        }
+
+
+        this.setState({
+            errors: errors
+        });
+        return SecurityCodeIsValid;
+    }
+
 
     ///Form validation
     validateForm() {
@@ -159,6 +212,22 @@ class AddChild extends Component {
                             </div>
                         </div>
 
+                    </div>
+                </form>
+
+
+                <form onSubmit={this.handleSubmitCode} >
+                    <h5>Register a child</h5>
+                    <div className="input-field">
+                        <label htmlFor="name">Security Code</label>
+                        <input type="text" name="securityCode" onChange={this.handleChangeCode} value={this.state.securityCode} />
+                        <div className="errorMsg">{this.state.errors.securityCode}</div>
+                    </div>
+                    <div className="col s2">
+                        <div className="input-field">
+                            <button className="btn waves-effect waves-light" >Add child</button>
+                            {register}
+                        </div>
                     </div>
                 </form>
 

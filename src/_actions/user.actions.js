@@ -10,6 +10,8 @@ export const userActions = {
     register_child,
     start_conversation,
     deleteChild,
+    getSecurityCode,
+    useSecurityCode,
     next_message,
     change_child
 };
@@ -90,27 +92,28 @@ function register_child(child) {
     function failure(error) { return { type: userConstants.REGISTERCHILD_FAILURE, error } }
 }
 
-function start_conversation(child_data){
+function start_conversation(child_data) {
     return dispatch => {
         dispatch(request(child_data));
         userService.results(child_data).then(
-            results_response =>{
+            results_response => {
                 // might be returned not a array, but one string 
                 const messages = results_response.message;
-                if (Array.isArray(messages)){
-                    for (var mes in messages){
-                        dispatch(success({message: messages[mes], test_id: results_response.test_id}))
+                if (Array.isArray(messages)) {
+                    for (var mes in messages) {
+                        dispatch(success({ message: messages[mes], test_id: results_response.test_id }))
                     }
-                }else{
-                    dispatch(success({message: messages, test_id: results_response.test_id})) 
+                } else {
+                    dispatch(success({ message: messages, test_id: results_response.test_id }))
                 }
-                
-            },                
+
+            },
             error => {
                 dispatch(alertActions.error(error.toString()));
             }
 
-    )};
+        )
+    };
 
     function success(response) { return { type: chatbotConstants.RECEIVED_MESSAGE, response } }
     function request(child_data) { return { type: chatbotConstants.REQUEST_MESSAGE, child_data } }
@@ -122,7 +125,7 @@ function deleteChild(child_id) {
 
         userService.delete(child_id)
             .then(
-                message => dispatch(success(child_id)),                    
+                message => dispatch(success(child_id)),
                 dispatch(alertActions.success('You successfully deleted a child.')),
                 error => dispatch(failure(child_id, error.toString()))
             );
@@ -133,19 +136,64 @@ function deleteChild(child_id) {
     function failure(child_id, error) { return { type: userConstants.DELETE_FAILURE, child_id, error } }
 }
 
+
+
+function getSecurityCode(child_id, parent_id) {
+    return dispatch => {
+        dispatch(request(child_id, parent_id));
+
+        userService.getSecurityCode(child_id, parent_id)
+            .then(
+                message => dispatch(success({ message: message.message, child_id: child_id })),
+                dispatch(alertActions.success('You successfully received a security code')),
+                error => dispatch(failure(child_id, parent_id, error.toString()))
+            );
+    };
+
+    function request(child_id, parent_id) { return { type: userConstants.CODE_REQUEST, child_id, parent_id } }
+    function success(response1, child_id) { return { type: userConstants.CODE_SUCCESS, response1, child_id } }
+    function failure(child_id, parent_id, error) { return { type: userConstants.CODE_FAILURE, child_id, parent_id, error } }
+}
+
+
+function useSecurityCode(sec_code, parent_id) {
+    return dispatch => {
+        dispatch(request(sec_code, parent_id));
+
+        userService.useSecurityCode(sec_code, parent_id)
+            .then(
+                useSecCode_response => {
+                    let new_shared_child = useSecCode_response.message
+                    dispatch(success(new_shared_child));
+                    history.push('/childlist');
+                    dispatch(alertActions.success('You successfully added a child.'));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request(sec_code, parent_id) { return { type: userConstants.REGISTER_COMMON_CHILD_REQUEST, sec_code, parent_id } }
+    function success(response2, sec_code) { return { type: userConstants.REGISTER_COMMON_CHILD_SUCCESS, response2, sec_code } }
+    function failure(sec_code, parent_id, error) { return { type: userConstants.REGISTER_COMMON_CHILD_FAILURE, sec_code, parent_id, error } }
+}
+
 function next_message(message_data) {
     console.log('sending next message')
     return dispatch => {
         console.log('sending next message yo');
         userService.process_message(message_data).then(
             results_response => {
-            // const message = results_response.message;
-            dispatch(success({message: results_response.message,  test_id: results_response.test_id}))
-            },                
+                // const message = results_response.message;
+                dispatch(success({ message: results_response.message, test_id: results_response.test_id }))
+            },
             error => {
                 dispatch(alertActions.error(error.toString()));
             }
-    )};
+        )
+    };
     function success(response) { return { type: chatbotConstants.RECEIVED_MESSAGE, response } }
 }
 

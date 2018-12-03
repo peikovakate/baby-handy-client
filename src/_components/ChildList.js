@@ -4,10 +4,12 @@ import { ChatBot } from './ChatbotComponent'
 import { userActions } from '../_actions';
 
 class ChildList extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.state = {child_id: null}
+        this.handleSubmitCodeRequest = this.handleSubmitCodeRequest.bind(this);
+        this.state = { child_id: null, sec_code: null, }
+        //sec_code: null};
     }
 
     handleSubmit(e) {
@@ -17,14 +19,23 @@ class ChildList extends Component {
         dispatch(userActions.deleteChild(child_id));
     }
 
+    handleSubmitCodeRequest(e) {
+        e.preventDefault();
+        const child_id = e.target.id;
+        const parent_id = this.props['user'].user.id;
+        const { dispatch } = this.props;
+        dispatch(userActions.getSecurityCode(child_id, parent_id));
+        //let a=userServices.getSecurityCode(child_id,parent_id);
+    }
+
     child_btn_click(e) {
         e.preventDefault();
         const child_id = parseInt(e.target.id)
         if (this.state.child_id !== child_id) {
             this.props.dispatch(userActions.change_child(child_id));
-            this.setState({child_id: child_id})
+            this.setState({ child_id: child_id })
         }
-    }    
+    }
 
     render() {
         return (
@@ -33,23 +44,28 @@ class ChildList extends Component {
                     {this.props['user'].user.children.map(children =>
                         <li key={children.child_id} className="collection-item"
                             id={children.child_id}>
-                            <p>ID: {children.child_id}, Name: {children.name} </p>
+                            <p>ID: {children.child_id}, Name: {children.name}, Security: {children.sec_code}   </p>
 
-                                <button className="btn waves-effect waves-light" 
-                                    id={children.child_id} 
-                                    onClick={this.handleSubmit}>
-                                    Delete child
+                            <button className="btn waves-effect waves-light"
+                                id={children.child_id}
+                                onClick={this.handleSubmit}>
+                                Delete child
                                 </button>
-                                <button className="btn waves-effect waves-light" 
-                                    id={children.child_id} 
-                                    onClick={this.child_btn_click.bind(this)}>
-                                    Start conversation
+                            <button className="btn waves-effect waves-light"
+                                id={children.child_id}
+                                onClick={this.child_btn_click.bind(this)}>
+                                Start conversation
                                 </button>
-                            </li>)
+                            <button className="btn waves-effect waves-light"
+                                id={children.child_id}
+                                onClick={this.handleSubmitCodeRequest}>
+                                Get security code
+                                </button>
+                        </li>)
                     }
                 </ul>
-                <ChatBot/>
-            </div>  
+                <ChatBot />
+            </div>
 
         )
     }

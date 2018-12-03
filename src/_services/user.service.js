@@ -12,6 +12,8 @@ export const userService = {
     results,
     process_message,
     delete: deleteChild,
+    getSecurityCode,
+    useSecurityCode,
 };
 
 function login(email, password) {
@@ -60,7 +62,7 @@ function register_child(child) {
     return fetch(`${api}/child/`, requestOptions).then(handleResponse);
 }
 
-function results(child_data){
+function results(child_data) {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
@@ -83,11 +85,30 @@ function deleteChild(child_id) {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
-  };
+    };
 
     return fetch(`${api}/delete/?child_id=${child_id}`, requestOptions).then(handleResponse);
 }
 
+
+function getSecurityCode(child_id, parent_id) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(`${api}/generate/?parent_id=${parent_id}&child_id=${child_id}`, requestOptions).then(handleResponse);
+}
+
+
+function useSecurityCode(sec_code, parent_id) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(`${api}/use/?parent_id=${parent_id}&seccode=${sec_code}`, requestOptions).then(handleResponse);
+}
 function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
