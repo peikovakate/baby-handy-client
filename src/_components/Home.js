@@ -2,7 +2,7 @@ import React from "react"
 
 const Home = props => (
     <div>
-        <h5>Baby-Handy App 2018</h5>
+        <h5 style={{ textAlignVertical: "center",textAlign: "center",}}>Baby-Handy App 2018</h5>
     </div>
 );
 

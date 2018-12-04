@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import { connect } from 'react-redux';
 import { ChatBot } from './ChatbotComponent'
 import { userActions } from '../_actions';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 class ChildList extends Component {
     constructor(props){
@@ -14,7 +16,20 @@ class ChildList extends Component {
         e.preventDefault();
         const child_id = e.target.id;
         const { dispatch } = this.props;
-        dispatch(userActions.deleteChild(child_id));
+        confirmAlert({
+            //title: 'Confirm to delete',
+            message: 'Are you sure to do this.',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => dispatch(userActions.deleteChild(child_id))
+              },
+              {
+                label: 'No',
+              }
+            ]
+          })
+
     }
 
     child_btn_click(e) {
@@ -28,23 +43,22 @@ class ChildList extends Component {
 
     render() {
         return (
-            <div >
+            <div style={{  paddingTop: 100,}} >
                 <ul className="collection">
                     {this.props['user'].user.children.map(children =>
-                        <li key={children.child_id} className="collection-item"
+                        <li style={{  paddingTop: 20,}}key={children.child_id} className="collection-item"
                             id={children.child_id}>
-                            <p>ID: {children.child_id}, Name: {children.name} </p>
-
-                                <button className="btn waves-effect waves-light" 
+                            <p style={{ fontSize:16,}}><b>ID:&emsp;</b>{children.child_id}<b> &emsp;&emsp;&emsp;&emsp; Name:&emsp;</b>{children.name} 
+                                <button style={{   position: "absolute", left:400,}}className="btn waves-effect waves-light" 
                                     id={children.child_id} 
                                     onClick={this.handleSubmit}>
                                     Delete child
                                 </button>
-                                <button className="btn waves-effect waves-light" 
+                                <button style={{ position: "absolute",left:600,}} className="btn waves-effect waves-light" 
                                     id={children.child_id} 
                                     onClick={this.child_btn_click.bind(this)}>
                                     Start conversation
-                                </button>
+                                </button> </p>
                             </li>)
                     }
                 </ul>

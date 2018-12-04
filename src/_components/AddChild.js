@@ -90,7 +90,7 @@ class AddChild extends Component {
         //first name validation
         if (!firstName) {
             formIsValid = false;
-            errors["firstName"] = "*Please enter your child first name.";
+            errors["firstname"] = "*Please enter your child first name.";
         }
 
         if (typeof firstName !== "undefined") {
@@ -126,15 +126,18 @@ class AddChild extends Component {
         const { register } = this.props;
         const { child, submitted } = this.state;
         return (
-            <div className='container'>
+            <div style={{  paddingTop: 100,}} className='container'>
                 <form onSubmit={this.handleSubmit} >
-                    <h5>Register a child</h5>
+                    <h5 style={{  paddingBottom: 15,}}>Register a child</h5>
                     <div className="input-field">
+                    <div className="col s3">
+
                         <label htmlFor="name">Name</label>
                         <input type="text" name="firstname" onChange={this.handleChange} value={this.state.child.firstname} />
                         <div className="errorMsg">{this.state.errors.firstname}</div>
+                        </div>
                     </div>
-                    {!child.birthday && <p>Choose a day</p>}
+                    {!child.birthday && <p>Choose birth date</p>}
                     <div className='row'>
                         <div className="col s3">
                             <div className="YearNavigation">

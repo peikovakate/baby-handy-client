@@ -31,7 +31,7 @@ class ChatBotComponent extends Component {
       console.log('Message data', message_data)
       dispatch(userActions.next_message(message_data))
     } else {
-      addResponseMessage("Sorry, I don't understand you. Please, unswer 'Yes' or 'No'.")
+      addResponseMessage("Sorry, I don't understand you. Please, answer 'Yes' or 'No'.")
     }
 
   } 

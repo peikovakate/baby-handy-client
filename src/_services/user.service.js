@@ -99,7 +99,7 @@ function handleResponse(response) {
                 window.location.reload(true)
                 // location.reload(true);
             }
-            const error = JSON.stringify(data) || response.statusText;
+            const error = JSON.stringify(data.message) || response.statusText;
             // const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
         }
