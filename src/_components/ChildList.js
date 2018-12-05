@@ -6,10 +6,10 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 class ChildList extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.state = {child_id: null}
+        this.state = { child_id: null }
     }
 
     handleSubmit(e) {
@@ -20,15 +20,15 @@ class ChildList extends Component {
             //title: 'Confirm to delete',
             message: 'Are you sure to do this.',
             buttons: [
-              {
-                label: 'Yes',
-                onClick: () => dispatch(userActions.deleteChild(child_id))
-              },
-              {
-                label: 'No',
-              }
+                {
+                    label: 'Yes',
+                    onClick: () => dispatch(userActions.deleteChild(child_id))
+                },
+                {
+                    label: 'No',
+                }
             ]
-          })
+        })
 
     }
 
@@ -37,33 +37,42 @@ class ChildList extends Component {
         const child_id = parseInt(e.target.id)
         if (this.state.child_id !== child_id) {
             this.props.dispatch(userActions.change_child(child_id));
-            this.setState({child_id: child_id})
+            this.setState({ child_id: child_id })
         }
-    }    
+    }
 
     render() {
         return (
-            <div className='card-panel' >
-                <ul className="collection">
-                    {this.props['user'].user.children.map(children =>
-                        <li style={{  paddingTop: 20,}}key={children.child_id} className="collection-item"
-                            id={children.child_id}>
-                            <p style={{ fontSize:16,}}><b>ID:&emsp;</b>{children.child_id}<b> &emsp;&emsp;&emsp;&emsp; Name:&emsp;</b>{children.name} 
-                                <button style={{   position: "absolute", left:400,}}className="btn waves-effect waves-light" 
-                                    id={children.child_id} 
-                                    onClick={this.handleSubmit}>
-                                    Delete child
-                                </button>
-                                <button style={{ position: "absolute",left:600,}} className="btn waves-effect waves-light" 
-                                    id={children.child_id} 
-                                    onClick={this.child_btn_click.bind(this)}>
-                                    Start conversation
-                                </button> </p>
-                            </li>)
-                    }
-                </ul>
-                <ChatBot/>
-            </div>  
+            <div class="row">
+                <div className="col s6">
+                        {this.props['user'].user.children.map(children =>
+                            <div className='card-panel' key={children.child_id} id={children.child_id}>
+                            <div class="card-content">
+                                <p><b>ID:&emsp;</b>{children.child_id}<b>
+                                    &emsp;&emsp;&emsp;&emsp; Name:&emsp;</b>{children.name}
+                                </p>
+                                </div>
+                                <div className="card-action" >
+                                    <div className="row">
+                                    <div className="col s4">
+                                    <button className="btn waves-effect waves-light cyan lighten-1"
+                                        id={children.child_id}
+                                        onClick={this.handleSubmit}>
+                                        Delete child
+                                    </button>
+                                    </div>
+                                    <button className="btn waves-effect waves-light cyan lighten-1"
+                                        id={children.child_id}
+                                        onClick={this.child_btn_click.bind(this)}>
+                                        Start conversation
+                                    </button>
+                                    </div>
+                                </div>
+                            </div>)}
+                    
+                </div>
+                <ChatBot />
+            </div>
 
         )
     }
