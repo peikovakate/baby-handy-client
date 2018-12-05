@@ -71,6 +71,7 @@ function results(child_data){
 
 function process_message(message_data) {
     console.log('sending request to process next message')
+    console.log(JSON.stringify(message_data))
     const requestOptions = {
         method: 'POST',
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
