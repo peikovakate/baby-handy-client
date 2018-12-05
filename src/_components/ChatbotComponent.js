@@ -25,7 +25,8 @@ class ChatBotComponent extends Component {
     if (lowercase_message === 'yes' || lowercase_message === 'no') {
       const message_data = {
         ...this.state,
-        'text': newMessage
+        'text': lowercase_message
+        // 'text': newMessage
       }
       const { dispatch } = this.props;
       console.log('Message data', message_data)
