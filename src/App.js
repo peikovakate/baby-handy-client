@@ -28,8 +28,9 @@ class App extends Component {
       <Router history={history}>
         <div>
           <Header/>
+            {/* ${alert.type} */}
             { alert.message &&
-              <div className={`alert ${alert.type}`}>{alert.message}</div>
+              <div className='card-panel'>{alert.message}</div>
             }
             <main>
               <Switch>

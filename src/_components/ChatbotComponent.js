@@ -56,6 +56,8 @@ class ChatBotComponent extends Component {
       <div>
         <Widget name='chat'
           handleNewUserMessage={this.handleNewUserMessage}
+          title="Baby-Handy Chatbot"
+          subtitle="Start talking about you child here"
         />
       </div>
     );

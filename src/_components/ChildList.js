@@ -43,7 +43,7 @@ class ChildList extends Component {
 
     render() {
         return (
-            <div style={{  paddingTop: 100,}} >
+            <div className='card-panel' >
                 <ul className="collection">
                     {this.props['user'].user.children.map(children =>
                         <li style={{  paddingTop: 20,}}key={children.child_id} className="collection-item"
