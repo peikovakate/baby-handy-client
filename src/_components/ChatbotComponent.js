@@ -62,7 +62,7 @@ class ChatBotComponent extends Component {
         <Widget name='chat'
           handleNewUserMessage={this.handleNewUserMessage}
           title="Baby-Handy Chatbot"
-          subtitle="Start talking about you child here"
+          subtitle="Start talking about your child here"
         />
       </div>
     );
