@@ -106,7 +106,7 @@ class AddChild extends Component {
         }
 
         if (typeof birthday !== "undefined") {
-            if (!birthday.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
+            if (!birthday.match(/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/)) {
                 formIsValid = false;
                 errors["birthday"] = "*Please enter the date in the format DD/MM/YYYY.";
             }
