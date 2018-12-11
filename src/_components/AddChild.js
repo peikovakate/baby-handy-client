@@ -126,7 +126,7 @@ class AddChild extends Component {
         const { register } = this.props;
         const { child, submitted } = this.state;
         return (
-            <div style={{  paddingTop: 100,}} className='container'>
+            <div style={{  paddingTop: 100,}} className='card-panel' style={{margin:20}}>
                 <form onSubmit={this.handleSubmit} >
                     <h5 style={{  paddingBottom: 15,}}>Register a child</h5>
                     <div className="input-field">
@@ -157,7 +157,7 @@ class AddChild extends Component {
                         </div>
                         <div className="col s2">
                             <div className="input-field">
-                                <button className="btn waves-effect waves-light" >Add child</button>
+                                <button className="btn waves-effect waves-light cyan lighten-1" >Add child</button>
                                 {register}
                             </div>
                         </div>

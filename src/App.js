@@ -10,6 +10,7 @@ import About from './_components/About'
 import { AddChild } from './_components/AddChild'
 import { ChildList }  from './_components/ChildList'
 
+
 class App extends Component {
 
   constructor(props) {
@@ -27,6 +28,7 @@ class App extends Component {
     return (
       <Router history={history}>
         <div>
+          <div class='layer'>
           <Header/>
             {/* ${alert.type} */}
             { alert.message &&
@@ -42,6 +44,7 @@ class App extends Component {
                 <PrivateRoute path='/childlist' component={ChildList}/>
               </Switch>
             </main>
+        </div>
         </div>
       </Router>
     );

@@ -3,7 +3,7 @@ import  About  from './About'
 
 const Home = props => (
     <div>
-        <h5 style={{ textAlignVertical: "center",textAlign: "center",}}>Baby-Handy App 2018</h5>
+        <h5 id='title' style={{ textAlignVertical: "center",textAlign: "center",}}>Baby-Handy App 2018</h5>
         <About/>
     </div>
 );

@@ -105,7 +105,7 @@ class SignUp extends Component {
 
     render() {
         return (
-            <div className='container'>
+            <div className='card-panel' style={{margin:20}}>
                 <form name="SignUp" onSubmit={this.handleSubmit} >
                     <h5>Sign Up</h5>
                     <div className="input-field">
@@ -124,7 +124,7 @@ class SignUp extends Component {
                         <div className="errorMsg">{this.state.errors.first_name}</div>
                     </div>
                     <div className="input-field">
-                        <button className="btn waves-effect waves-light" >SignUp</button>
+                        <button className="btn waves-effect waves-light cyan lighten-1" >SignUp</button>
                     </div>
                 </form>
             </div>

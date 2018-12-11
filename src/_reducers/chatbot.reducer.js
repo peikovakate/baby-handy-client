@@ -9,7 +9,7 @@ export function chatbot(state = {}, action) {
         test_id: action.response.test_id
       };
     default:
-      return state
+      return {}
   }
 }
 

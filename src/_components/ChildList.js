@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { ChatBot } from './ChatbotComponent'
 import { userActions } from '../_actions';
 import { confirmAlert } from 'react-confirm-alert'; // Import
+import { toggleWidget } from 'react-chat-widget';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 class ChildList extends Component {
@@ -38,33 +39,38 @@ class ChildList extends Component {
         if (this.state.child_id !== child_id) {
             this.props.dispatch(userActions.change_child(child_id));
             this.setState({ child_id: child_id })
+            var hasClass = document.getElementsByClassName('rcw-conversation-container')
+            if(hasClass.length === 0){
+                toggleWidget()
+            }
         }
+
     }
 
     render() {
         return (
-            <div class="row">
+            <div className="row">
                 <div className="col s6">
                         {this.props['user'].user.children.map(children =>
-                            <div className='card-panel' key={children.child_id} id={children.child_id}>
-                            <div class="card-content">
-                                <p><b>ID:&emsp;</b>{children.child_id}<b>
-                                    &emsp;&emsp;&emsp;&emsp; Name:&emsp;</b>{children.name}
+                            <div className='card-panel' style={{margin:20}} key={children.child_id} id={children.child_id}>
+                            <div className="card-content">
+                                <p>
+                                <b>&emsp;&emsp;&emsp;&emsp; Name:&emsp;</b>{children.name}
                                 </p>
                                 </div>
                                 <div className="card-action" >
                                     <div className="row">
-                                    <div className="col s4">
-                                    <button className="btn waves-effect waves-light cyan lighten-1"
-                                        id={children.child_id}
-                                        onClick={this.handleSubmit}>
-                                        Delete child
-                                    </button>
-                                    </div>
+                                    <div className="col s6">
                                     <button className="btn waves-effect waves-light cyan lighten-1"
                                         id={children.child_id}
                                         onClick={this.child_btn_click.bind(this)}>
                                         Start conversation
+                                    </button>
+                                    </div>
+                                    <button className="btn waves-effect waves-light cyan lighten-1"
+                                        id={children.child_id}
+                                        onClick={this.handleSubmit}>
+                                        Remove child
                                     </button>
                                     </div>
                                 </div>

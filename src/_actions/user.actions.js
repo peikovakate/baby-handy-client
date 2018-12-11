@@ -2,6 +2,7 @@ import { userConstants, chatbotConstants } from '../_constants';
 import { userService } from '../_services';
 import { alertActions } from './';
 import { history } from '../_helpers';
+import { dropMessages } from 'react-chat-widget';
 
 export const userActions = {
     login,
@@ -37,6 +38,7 @@ function login(email, password) {
 }
 
 function logout() {
+    dropMessages()
     userService.logout();
     return { type: userConstants.LOGOUT };
 }

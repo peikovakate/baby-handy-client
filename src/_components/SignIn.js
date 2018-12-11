@@ -1,10 +1,10 @@
-import React, {Component} from "react"
+import React, { Component } from "react"
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userActions } from '../_actions';
 
 
-class SignIn extends Component{
+class SignIn extends Component {
     constructor(props) {
         super(props);
 
@@ -15,7 +15,7 @@ class SignIn extends Component{
             email: '',
             password: '',
             submitted: false,
-            errors:{}
+            errors: {}
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -29,79 +29,79 @@ class SignIn extends Component{
 
     handleSubmit(e) {
         e.preventDefault();
-      if (this.validateForm()) {
-        this.setState({ submitted: true });
-        const { email, password } = this.state;
-        const { dispatch } = this.props;
-        if (email && password) {
-            dispatch(userActions.login(email, password));
+        if (this.validateForm()) {
+            this.setState({ submitted: true });
+            const { email, password } = this.state;
+            const { dispatch } = this.props;
+            if (email && password) {
+                dispatch(userActions.login(email, password));
+            }
         }
     }
-}
 
-   validateForm() {
+    validateForm() {
 
-      let email = this.state.email;
-      let password=this.state.password;
-      let errors = {};
-      let formIsValid = true;
+        let email = this.state.email;
+        let password = this.state.password;
+        let errors = {};
+        let formIsValid = true;
 
 
-      if (!email) {
-        formIsValid = false;
-        errors["email"] = "*Please enter your email.";
-      }
-
-      if (typeof email !== "undefined") {
-        //regular expression for email validation
-        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-        if (!pattern.test(email)) {
-          formIsValid = false;
-          errors["email"] = "*Please enter valid email.";
+        if (!email) {
+            formIsValid = false;
+            errors["email"] = "*Please enter your email.";
         }
-      }
 
-      
+        if (typeof email !== "undefined") {
+            //regular expression for email validation
+            var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+            if (!pattern.test(email)) {
+                formIsValid = false;
+                errors["email"] = "*Please enter valid email.";
+            }
+        }
 
-      if (!password) {
-        formIsValid = false;
-        errors["password"] = "*Please enter your password.";
-      }
 
- 
 
-      this.setState({
-        errors: errors
-      });
-      return formIsValid;
+        if (!password) {
+            formIsValid = false;
+            errors["password"] = "*Please enter your password.";
+        }
+
+
+
+        this.setState({
+            errors: errors
+        });
+        return formIsValid;
 
 
     }
 
-    render(){
-        return(
-             <div className='container'>
+    render() {
+        return (
+            <div className='card-panel'  style={{margin:20}}>
 
-           <form  name="LogIn" onSubmit= {this.handleSubmit} >
+                <form name="LogIn" onSubmit={this.handleSubmit} >
                     <h5>Sign In</h5>
-                    <div className ="input-field">
-                        <label  htmlFor='email'>Email</label>
-                        <input type="text"  name="email" value={this.state.email} onChange={this.handleChange}/>
-
-                         </div>
-                         <div className="errorMsg">{this.state.errors.email}</div>
-                    <div className ="input-field">
-                        <label  htmlFor='password'>Password</label>
-                        <input type="password"  name="password" value={this.state.password}  onChange={this.handleChange}/>
-
-                    </div>
-                        <div className="errorMsg">{this.state.errors.password}</div>
                     <div className="input-field">
-                        <button className="btn waves-effect waves-light" >Login</button>
+                        <label htmlFor='email'>Email</label>
+                        <input type="text" name="email" value={this.state.email} onChange={this.handleChange} />
+
                     </div>
-                        <Link to="/signup" className="btn btn-link">Register</Link>
-                 </form>
-             </div>
+                    <div className="errorMsg">{this.state.errors.email}</div>
+                    <div className="input-field">
+                        <label htmlFor='password'>Password</label>
+                        <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+
+                    </div>
+                    <div className="errorMsg">{this.state.errors.password}</div>
+                    <div className="input-field">
+                        <button className="btn waves-effect waves-light cyan lighten-1" >Login</button>
+                    </div>
+                    <Link to="/signup" className="btn waves-effect waves-light cyan lighten-1">Register</Link>
+                </form>
+            </div>
         );
     }
 }
@@ -115,5 +115,5 @@ function mapStateToProps(state) {
 }
 
 const connectedSignInPage = connect(mapStateToProps)(SignIn);
-export { connectedSignInPage as SignIn }; 
+export { connectedSignInPage as SignIn };
 
