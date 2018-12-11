@@ -99,7 +99,7 @@ class SignIn extends Component {
                     <div className="input-field">
                         <button className="btn waves-effect waves-light cyan lighten-1" >Login</button>
                     </div>
-                    <Link to="/signup" className="btn waves-effect waves-light cyan lighten-1">Register</Link>
+                    <button to="/signup" className="btn waves-effect waves-light cyan lighten-1">Register</button>
                 </form>
             </div>
         );

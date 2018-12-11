@@ -124,7 +124,7 @@ class SignUp extends Component {
                         <div className="errorMsg">{this.state.errors.first_name}</div>
                     </div>
                     <div className="input-field">
-                        <button className="btn waves-effect waves-light cyan lighten-1" >SignUp</button>
+                        <button className="btn waves-effect waves-light cyan lighten-1" >Register</button>
                     </div>
                 </form>
             </div>
