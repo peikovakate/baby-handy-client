@@ -107,7 +107,7 @@ class SignUp extends Component {
         return (
             <div className='card-panel' style={{margin:20}}>
                 <form name="SignUp" onSubmit={this.handleSubmit} >
-                    <h5>Sign Up</h5>
+                    <h5>Register</h5>
                     <div className="input-field">
                         <label htmlFor='email'>Email</label>
                         <input type="text" name="email" onChange={this.handleChange} value={this.state.user.email} />

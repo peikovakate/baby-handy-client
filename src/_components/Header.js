@@ -16,8 +16,8 @@ class HeaderLinks extends React.Component{
     }else {
       return(
         <div className='right'> 
-          <li><NavLink to='/signin'>Sign In</NavLink></li>
-          <li><NavLink to='/signup'>Sign Up</NavLink></li>
+          <li><NavLink to='/signin'>Log In</NavLink></li>
+          <li><NavLink to='/signup'>Register</NavLink></li>
         </div>)
     }
   }
@@ -30,7 +30,7 @@ class Header extends React.Component{
     <header>
       <nav className=' cyan lighten-1'>
         <ul className='right'>    
-          <li className='active'><NavLink to='/'>Home</NavLink></li>
+          <li><NavLink to='/'>Home</NavLink></li>
           <li><NavLink to='/about'>About</NavLink></li>
           <HeaderLinks/>
         </ul>

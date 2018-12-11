@@ -20,7 +20,6 @@ class ChatBotComponent extends Component {
   }
 
   handleNewUserMessage = (newMessage) => {
-    console.log(`New message form user! ${newMessage}`);
     let lowercase_message = newMessage.toLowerCase()
     let test_id =  this.state.test_id
     if (typeof test_id === "undefined"){
@@ -33,7 +32,6 @@ class ChatBotComponent extends Component {
         // 'text': newMessage
       }
       const { dispatch } = this.props;
-      console.log('Message data', message_data)
       dispatch(userActions.next_message(message_data))
     } else {
       addResponseMessage("Sorry, I don't understand you. Please, answer 'Yes' or 'No'.")

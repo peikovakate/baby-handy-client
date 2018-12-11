@@ -136,9 +136,7 @@ function deleteChild(child_id) {
 }
 
 function next_message(message_data) {
-    console.log('sending next message')
     return dispatch => {
-        console.log('sending next message yo');
         userService.process_message(message_data).then(
             results_response => {
             // const message = results_response.message;

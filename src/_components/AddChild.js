@@ -70,7 +70,6 @@ class AddChild extends Component {
             this.setState({ submitted: true });
             const { child } = this.state;
             const { dispatch } = this.props;
-            console.log(dispatch);
             if (child.firstname && child.birthday) {
                 child.parent_id = this.props['user'].user.id
                 dispatch(userActions.register_child(child));
