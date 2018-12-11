@@ -39,10 +39,10 @@ class ChildList extends Component {
         if (this.state.child_id !== child_id) {
             this.props.dispatch(userActions.change_child(child_id));
             this.setState({ child_id: child_id })
-            var hasClass = document.getElementsByClassName('rcw-conversation-container')
-            if(hasClass.length === 0){
-                toggleWidget()
-            }
+        }
+        var hasClass = document.getElementsByClassName('rcw-conversation-container')
+        if(hasClass.length === 0){
+            toggleWidget()
         }
 
     }
@@ -55,7 +55,7 @@ class ChildList extends Component {
                             <div className='card-panel' style={{margin:20}} key={children.child_id} id={children.child_id}>
                             <div className="card-content">
                                 <p>
-                                <b>&emsp;&emsp;&emsp;&emsp; Name:&emsp;</b>{children.name}
+                                <b>Name:&emsp;</b>{children.name}, {children.birthday}
                                 </p>
                                 </div>
                                 <div className="card-action" >
