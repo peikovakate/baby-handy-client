@@ -2,7 +2,7 @@ import { authHeader } from '../_helpers';
 
 // const api = "http://127.0.0.1:8000"
 const api = "http://3.8.93.243:8000"
-// const api = "http://3.8.93.243"
+// const api = "https://3.8.93.243"
 
 export const userService = {
     login,
