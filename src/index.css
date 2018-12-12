@@ -57,12 +57,12 @@ font-family: "Segoe UI", "Roboto", "Oxygen",
 
 .baby-container {
   height: 350px;
-  left: 15%;
+  left: 30%;
   position: fixed;
   text-align: center;
-  top: 80%;
-  transform: translate(-50%, -50%) rotate(-30deg);
-/*   transform: translate(-50%, -50%); */
+  top: 50%;
+  /* transform: translate(-50%, -50%) rotate(-20deg); */
+  transform: rotate(-20deg);
 }
 /* /////////////////////////////////////////// HEAD /////// */
 #head {

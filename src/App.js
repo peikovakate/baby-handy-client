@@ -35,9 +35,9 @@ class App extends Component {
             { alert.message &&
               <div className='card-panel'>{alert.message}</div>
             }
-           
+
             <main>
-            <Baby/>
+            
               <Switch>
                 <Route exact path='/' component={Home}/>
                 <Route path='/about' component={About}/>
@@ -47,6 +47,9 @@ class App extends Component {
                 <PrivateRoute path='/childlist' component={ChildList}/>
               </Switch>
             </main>
+            <div className='container'>
+              {/* <Baby/> */}
+            </div>
             
         </div>
         </div>
