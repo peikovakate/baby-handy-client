@@ -32,7 +32,13 @@ class Header extends React.Component{
         <ul className='right'>    
           <li><NavLink to='/'>Home</NavLink></li>
           <li><NavLink to='/about'>About</NavLink></li>
-          <HeaderLinks/>
+          {/* <HeaderLinks/> */}
+          {localStorage.getItem('user') && <li><NavLink to='/addchild'>Add child</NavLink></li>}
+          {localStorage.getItem('user') &&  <li><NavLink to='/childlist'>Child List</NavLink></li>}
+          {localStorage.getItem('user') &&  <li><NavLink to='/signin'>Log Out</NavLink></li>}
+          
+          {!localStorage.getItem('user') && <li><NavLink to='/signin'>Log In</NavLink></li>}
+          {!localStorage.getItem('user') && <li><NavLink to='/signup'>Register</NavLink></li>}
         </ul>
       </nav>
     </header>
