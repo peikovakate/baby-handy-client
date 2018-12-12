@@ -3,22 +3,22 @@ import React from "react"
 const Baby = props => (
     <div className="baby-container">
     <div id="background"></div>
-<div class="baby-container">
+<div className="baby-container">
   <div id="baby-shadow"></div>
   <div id="baby-body"></div>
   <div id="head">
     <div id="hair-container">
-      <div id="hair-left" class="hair"></div>
-      <div id="hair-right" class="hair"></div>
+      <div id="hair-left" className="hair"></div>
+      <div id="hair-right" className="hair"></div>
     </div>
     <div id="eye-container">
-      <div class="eye"></div>
-      <div id="eye-right" class="eye"></div>
+      <div className="eye"></div>
+      <div id="eye-right" className="eye"></div>
     </div>
     <div id="mouth-container">
-      <div id="mouth-left" class="mouth"></div>
-      <div id="mouth-center" class="mouth"></div>
-      <div id="mouth-right" class="mouth"></div>
+      <div id="mouth-left" className="mouth"></div>
+      <div id="mouth-center" className="mouth"></div>
+      <div id="mouth-right" className="mouth"></div>
     </div>
   </div>
   

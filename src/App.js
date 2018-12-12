@@ -29,7 +29,7 @@ class App extends Component {
     return (
       <Router history={history}>
         <div>
-          <div class='layer'>
+          <div className='layer'>
           <Header/>
             {/* ${alert.type} */}
             { alert.message &&
