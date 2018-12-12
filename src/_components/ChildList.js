@@ -61,7 +61,7 @@ class ChildList extends Component {
                                 <div className="card-content">
                                     <p style={{fontSize:18, margin:10}}>
                                         <span id='niceText'>Name: </span>
-                                        &emsp; {children.name}, &emsp;
+                                        &emsp; {children.name} &emsp;
                                         <span id='niceText'>Birthday: </span> 
                                         &emsp; {children.birthday}
                                     </p>
