@@ -51,33 +51,34 @@ class ChildList extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="">
+                    <div class="col s12 cards-container">
                         {this.props['user'].user.children.map(children =>
-                            <div className='card-panel' style={{ margin: 20 }} key={children.child_id} id={children.child_id}>
+                         
+                            <div className='card' style={{ margin: 20 }} key={children.child_id} id={children.child_id}>
                                 <div className="card-content">
                                     <p>
                                         <b>Name:&emsp;</b>{children.name}, {children.birthday}
                                     </p>
                                 </div>
                                 <div className="card-action" >
-                                    <div className="row">
-                                        <div className="col s12 l6">
+                                        
                                             <button className="btn waves-effect waves-light cyan lighten-1"
                                                 id={children.child_id}
-                                                onClick={this.child_btn_click.bind(this)}>
+                                                onClick={this.child_btn_click.bind(this)}
+                                                style={{margin:10}}>
                                                 Start conversation
                                             </button>
-                                        </div>
-                                        <div className="col s12 l6">
                                             <button className="btn waves-effect waves-light cyan lighten-1"
                                                 id={children.child_id}
-                                                onClick={this.handleSubmit}>
+                                                onClick={this.handleSubmit}
+                                                style={{margin:10}} >
                                                 Remove child
                                             </button>
-                                        </div>
+                                 
                                     </div>
-                                </div>
-                            </div>)}
+                    
+                            </div>
+                            )}
 
                     </div>
                     <ChatBot />
