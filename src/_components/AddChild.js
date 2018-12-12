@@ -127,11 +127,10 @@ class AddChild extends Component {
         return (
             <div className='container'>
                 <div style={{ margin: 20 }} className='card-panel'>
-                    <form onSubmit={this.handleSubmit} >
+                    <form onSubmit={this.handleSubmit} style={{ margin: 20 }}>
                         <h5 style={{ paddingBottom: 15, }}>Register a child</h5>
                         <div className="input-field">
                             <div className="col s3">
-
                                 <label htmlFor="name">Name</label>
                                 <input type="text" name="firstname" onChange={this.handleChange} value={this.state.child.firstname} />
                                 <div className="errorMsg">{this.state.errors.firstname}</div>
@@ -139,7 +138,7 @@ class AddChild extends Component {
                         </div>
                         {!child.birthday && <p>Choose birth date</p>}
                         <div className='row'>
-                            <div className="col s3">
+                            <div className="col s12 l6" style={{padding:0}}>
                                 <div className="YearNavigation">
                                     <DayPickerInput
                                         name="birthday"
@@ -154,13 +153,15 @@ class AddChild extends Component {
                                 </div>
 
                                 <div className="errorMsg">{this.state.errors.birthday}</div>
+                                
                             </div>
-                            <div className="col s2">
+                            <div className="col s12 l6">
                                 <div className="input-field">
                                     <button className="btn waves-effect waves-light cyan lighten-1" >Add child</button>
                                     {register}
                                 </div>
                             </div>
+                            
 
                         </div>
                     </form>

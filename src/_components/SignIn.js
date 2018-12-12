@@ -83,7 +83,7 @@ class SignIn extends Component {
             <div className='container'>
                 <div className='card-panel' style={{ margin: 20 }}>
 
-                    <form name="LogIn" onSubmit={this.handleSubmit} >
+                    <form name="LogIn" onSubmit={this.handleSubmit} style={{ margin: 20 }}>
                         <h5>Log In</h5>
                         <div className="input-field">
                             <label htmlFor='email'>Email</label>
@@ -98,9 +98,15 @@ class SignIn extends Component {
                         </div>
                         <div className="errorMsg">{this.state.errors.password}</div>
                         <div className="input-field">
-                            <button className="btn waves-effect waves-light cyan lighten-1" >Login</button>
+                            <button className="btn waves-effect waves-light cyan lighten-1"
+                                style={{margin:10}}>
+                                Login</button>
+                            <button className="btn waves-effect waves-light cyan lighten-1"
+                                to="/signup"
+                                style={{margin:10}}>
+                                Register</button>
                         </div>
-                        <button to="/signup" className="btn waves-effect waves-light cyan lighten-1">Register</button>
+                        
                     </form>
                 </div>
             </div>

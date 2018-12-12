@@ -20,6 +20,20 @@ body {
   text-shadow: 0 1px 1px #fff; 
 }
 
+#simpleTitle {
+  color: #d54d7b; 
+  font-family: "Carter One", cursive; 
+  font-size: 30px; 
+  /* text-align: center;  */
+}
+
+#niceText {
+  color: #d54d7b; 
+  font-family: "Carter One", cursive;
+  font-size: 20px;  
+
+}
+
 .layer {
   background-color: rgba(245, 221, 194, 0);
   position: absolute;

@@ -107,7 +107,7 @@ class SignUp extends Component {
         return (
             <div className='container'>
                 <div className='card-panel' style={{ margin: 20 }}>
-                    <form name="SignUp" onSubmit={this.handleSubmit} >
+                    <form name="SignUp" onSubmit={this.handleSubmit}  style={{ margin: 20 }}>
                         <h5>Register</h5>
                         <div className="input-field">
                             <label htmlFor='email'>Email</label>
@@ -125,7 +125,9 @@ class SignUp extends Component {
                             <div className="errorMsg">{this.state.errors.first_name}</div>
                         </div>
                         <div className="input-field">
-                            <button className="btn waves-effect waves-light cyan lighten-1" >Register</button>
+                            <button className="btn waves-effect waves-light cyan lighten-1"
+                                style={{margin:10}
+                                }>Register</button>
                         </div>
                     </form>
                 </div>

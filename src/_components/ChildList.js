@@ -54,10 +54,16 @@ class ChildList extends Component {
                     <div class="col s12 cards-container">
                         {this.props['user'].user.children.map(children =>
                          
-                            <div className='card' style={{ margin: 20 }} key={children.child_id} id={children.child_id}>
+                            <div className='card' 
+                                style={{ margin: 20 }} 
+                                key={children.child_id} 
+                                id={children.child_id}>
                                 <div className="card-content">
-                                    <p>
-                                        <b>Name:&emsp;</b>{children.name}, {children.birthday}
+                                    <p style={{fontSize:18, margin:10}}>
+                                        <span id='niceText'>Name: </span>
+                                        &emsp; {children.name}, &emsp;
+                                        <span id='niceText'>Birthday: </span> 
+                                        &emsp; {children.birthday}
                                     </p>
                                 </div>
                                 <div className="card-action" >
