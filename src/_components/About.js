@@ -5,7 +5,7 @@ const About = props => (
         <div >
             <div className='card-panel' style={{ margin: 20 }}>
                 <p style={{ textAlignVertical: "center", fontSize: 20 }}>
-                    Baby-Handy is product of Distributed Systems course work, taught at University of Tartu, autumn semester 2018.</p>
+                    <span id='niceText'>Baby-Handy</span> is product of Distributed Systems course work, taught at University of Tartu, autumn semester 2018.</p>
                     It aims to help parents keep track of their child development. <br></br>
                     The first step on using it is creating a profile and registering your children.<br></br>
                     The chatbot will help you detect the progress of your child through different test and milestones. <br></br>
