@@ -1,8 +1,8 @@
 import { authHeader } from '../_helpers';
 
 // const api = "http://127.0.0.1:8000"
-const api = "http://3.8.93.243:8000"
-// const api = "https://3.8.93.243"
+// const api = "http://3.8.93.243:8000"
+const api = "https://3.8.93.243"
 
 export const userService = {
     login,
@@ -24,6 +24,7 @@ function login(email, password) {
     return fetch(`${api}/users/login/`, requestOptions)
         .then(handleResponse)
         .then(user => {
+
             // login successful if there's a jwt token in the response
             if (user.token) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -92,6 +93,7 @@ function deleteChild(child_id) {
 function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
+        console.log("DATA", data)
         if (!response.ok) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
@@ -100,8 +102,7 @@ function handleResponse(response) {
                 window.location.reload(true)
                 // location.reload(true);
             }
-            const error = JSON.stringify(data.message) || response.statusText;
-            // const error = (data && data.message) || response.statusText;
+            const error = JSON.stringify(data.error) || JSON.stringify(data.message) || response.statusText;
             return Promise.reject(error);
         }
         return data;
