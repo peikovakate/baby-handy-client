@@ -4,6 +4,7 @@ import { ChatBot } from './ChatbotComponent'
 import { userActions } from '../_actions';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import { toggleWidget } from 'react-chat-widget';
+import { history } from '../_helpers';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 class ChildList extends Component {
@@ -47,7 +48,8 @@ class ChildList extends Component {
 
     }
     handleClickOnLink(e){
-        history.push
+        e.preventDefault();
+        history.push('/addchild')
     }
 
     render() {
@@ -57,7 +59,7 @@ class ChildList extends Component {
                     {!this.props['user'].user.children.length>0 && 
                         <div className='card' style={{marginTop:20, padding: 20 }}>
                             You don't have any child registered. 
-                            Please, add them <a href='/#' onClick={handleClickOnLink}>here</a>.
+                            Please, add them <a href='/#' onClick={this.handleClickOnLink}>here</a>.
                         </div>
                         }
                     <div class="col s12 cards-container">
