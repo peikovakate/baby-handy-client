@@ -80,27 +80,29 @@ class SignIn extends Component {
 
     render() {
         return (
-            <div className='card-panel'  style={{margin:20}}>
+            <div className='container'>
+                <div className='card-panel' style={{ margin: 20 }}>
 
-                <form name="LogIn" onSubmit={this.handleSubmit} >
-                    <h5>Log In</h5>
-                    <div className="input-field">
-                        <label htmlFor='email'>Email</label>
-                        <input type="text" name="email" value={this.state.email} onChange={this.handleChange} />
+                    <form name="LogIn" onSubmit={this.handleSubmit} >
+                        <h5>Log In</h5>
+                        <div className="input-field">
+                            <label htmlFor='email'>Email</label>
+                            <input type="text" name="email" value={this.state.email} onChange={this.handleChange} />
 
-                    </div>
-                    <div className="errorMsg">{this.state.errors.email}</div>
-                    <div className="input-field">
-                        <label htmlFor='password'>Password</label>
-                        <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+                        </div>
+                        <div className="errorMsg">{this.state.errors.email}</div>
+                        <div className="input-field">
+                            <label htmlFor='password'>Password</label>
+                            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
 
-                    </div>
-                    <div className="errorMsg">{this.state.errors.password}</div>
-                    <div className="input-field">
-                        <button className="btn waves-effect waves-light cyan lighten-1" >Login</button>
-                    </div>
-                    <button to="/signup" className="btn waves-effect waves-light cyan lighten-1">Register</button>
-                </form>
+                        </div>
+                        <div className="errorMsg">{this.state.errors.password}</div>
+                        <div className="input-field">
+                            <button className="btn waves-effect waves-light cyan lighten-1" >Login</button>
+                        </div>
+                        <button to="/signup" className="btn waves-effect waves-light cyan lighten-1">Register</button>
+                    </form>
+                </div>
             </div>
         );
     }

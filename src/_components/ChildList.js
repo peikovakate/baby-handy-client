@@ -41,7 +41,7 @@ class ChildList extends Component {
             this.setState({ child_id: child_id })
         }
         var hasClass = document.getElementsByClassName('rcw-conversation-container')
-        if(hasClass.length === 0){
+        if (hasClass.length === 0) {
             toggleWidget()
         }
 
@@ -49,37 +49,40 @@ class ChildList extends Component {
 
     render() {
         return (
-            <div className="row">
-                <div className="col s6">
+            <div className="container">
+                <div className="row">
+                    <div className="">
                         {this.props['user'].user.children.map(children =>
-                            <div className='card-panel' style={{margin:20}} key={children.child_id} id={children.child_id}>
-                            <div className="card-content">
-                                <p>
-                                <b>Name:&emsp;</b>{children.name}, {children.birthday}
-                                </p>
+                            <div className='card-panel' style={{ margin: 20 }} key={children.child_id} id={children.child_id}>
+                                <div className="card-content">
+                                    <p>
+                                        <b>Name:&emsp;</b>{children.name}, {children.birthday}
+                                    </p>
                                 </div>
                                 <div className="card-action" >
                                     <div className="row">
-                                    <div className="col s6">
-                                    <button className="btn waves-effect waves-light cyan lighten-1"
-                                        id={children.child_id}
-                                        onClick={this.child_btn_click.bind(this)}>
-                                        Start conversation
-                                    </button>
-                                    </div>
-                                    <button className="btn waves-effect waves-light cyan lighten-1"
-                                        id={children.child_id}
-                                        onClick={this.handleSubmit}>
-                                        Remove child
-                                    </button>
+                                        <div className="col s12 l6">
+                                            <button className="btn waves-effect waves-light cyan lighten-1"
+                                                id={children.child_id}
+                                                onClick={this.child_btn_click.bind(this)}>
+                                                Start conversation
+                                            </button>
+                                        </div>
+                                        <div className="col s12 l6">
+                                            <button className="btn waves-effect waves-light cyan lighten-1"
+                                                id={children.child_id}
+                                                onClick={this.handleSubmit}>
+                                                Remove child
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>)}
-                    
-                </div>
-                <ChatBot />
-            </div>
 
+                    </div>
+                    <ChatBot />
+                </div>
+            </div>
         )
     }
 

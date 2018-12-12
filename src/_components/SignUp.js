@@ -105,28 +105,30 @@ class SignUp extends Component {
 
     render() {
         return (
-            <div className='card-panel' style={{margin:20}}>
-                <form name="SignUp" onSubmit={this.handleSubmit} >
-                    <h5>Register</h5>
-                    <div className="input-field">
-                        <label htmlFor='email'>Email</label>
-                        <input type="text" name="email" onChange={this.handleChange} value={this.state.user.email} />
-                        <div className="errorMsg">{this.state.errors.email}</div>
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor='password'>Password</label>
-                        <input type="password" name="password" onChange={this.handleChange} value={this.state.user.password} />
-                        <div className="errorMsg">{this.state.errors.password}</div>
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="first_name">First Name</label>
-                        <input type="text" name="first_name" onChange={this.handleChange} value={this.state.user.first_name} />
-                        <div className="errorMsg">{this.state.errors.first_name}</div>
-                    </div>
-                    <div className="input-field">
-                        <button className="btn waves-effect waves-light cyan lighten-1" >Register</button>
-                    </div>
-                </form>
+            <div className='container'>
+                <div className='card-panel' style={{ margin: 20 }}>
+                    <form name="SignUp" onSubmit={this.handleSubmit} >
+                        <h5>Register</h5>
+                        <div className="input-field">
+                            <label htmlFor='email'>Email</label>
+                            <input type="text" name="email" onChange={this.handleChange} value={this.state.user.email} />
+                            <div className="errorMsg">{this.state.errors.email}</div>
+                        </div>
+                        <div className="input-field">
+                            <label htmlFor='password'>Password</label>
+                            <input type="password" name="password" onChange={this.handleChange} value={this.state.user.password} />
+                            <div className="errorMsg">{this.state.errors.password}</div>
+                        </div>
+                        <div className="input-field">
+                            <label htmlFor="first_name">First Name</label>
+                            <input type="text" name="first_name" onChange={this.handleChange} value={this.state.user.first_name} />
+                            <div className="errorMsg">{this.state.errors.first_name}</div>
+                        </div>
+                        <div className="input-field">
+                            <button className="btn waves-effect waves-light cyan lighten-1" >Register</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         )
     }

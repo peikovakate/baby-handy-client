@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { userActions } from '../_actions';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-import  { formatDate } from 'react-day-picker/moment';
+import { formatDate } from 'react-day-picker/moment';
 
 
 class AddChild extends Component {
@@ -125,48 +125,49 @@ class AddChild extends Component {
         const { register } = this.props;
         const { child, submitted } = this.state;
         return (
-            <div style={{  paddingTop: 100,}} className='card-panel' style={{margin:20}}>
-                <form onSubmit={this.handleSubmit} >
-                    <h5 style={{  paddingBottom: 15,}}>Register a child</h5>
-                    <div className="input-field">
-                    <div className="col s3">
+            <div className='container'>
+                <div style={{ margin: 20 }} className='card-panel'>
+                    <form onSubmit={this.handleSubmit} >
+                        <h5 style={{ paddingBottom: 15, }}>Register a child</h5>
+                        <div className="input-field">
+                            <div className="col s3">
 
-                        <label htmlFor="name">Name</label>
-                        <input type="text" name="firstname" onChange={this.handleChange} value={this.state.child.firstname} />
-                        <div className="errorMsg">{this.state.errors.firstname}</div>
-                        </div>
-                    </div>
-                    {!child.birthday && <p>Choose birth date</p>}
-                    <div className='row'>
-                        <div className="col s3">
-                            <div className="YearNavigation">
-                                <DayPickerInput
-                                    name="birthday"
-                                    keepFocus={true}
-                                    ref={el => (this.dayPickerInput = el)}
-                                    placeholder={`${formatDate(new Date(), 'DD/MM/YYYY')}`}
-                                    dayPickerProps={{ disabledDays: { after: new Date() } }}
-                                    formatDate={formatDate}
-                                    onDayChange={this.handleDayChange}
-                                    onChange={this.handleChange}
-                                    value={this.state.child.birthday} />
-                            </div>
-
-                            <div className="errorMsg">{this.state.errors.birthday}</div>
-                        </div>
-                        <div className="col s2">
-                            <div className="input-field">
-                                <button className="btn waves-effect waves-light cyan lighten-1" >Add child</button>
-                                {register}
+                                <label htmlFor="name">Name</label>
+                                <input type="text" name="firstname" onChange={this.handleChange} value={this.state.child.firstname} />
+                                <div className="errorMsg">{this.state.errors.firstname}</div>
                             </div>
                         </div>
+                        {!child.birthday && <p>Choose birth date</p>}
+                        <div className='row'>
+                            <div className="col s3">
+                                <div className="YearNavigation">
+                                    <DayPickerInput
+                                        name="birthday"
+                                        keepFocus={true}
+                                        ref={el => (this.dayPickerInput = el)}
+                                        placeholder={`${formatDate(new Date(), 'DD/MM/YYYY')}`}
+                                        dayPickerProps={{ disabledDays: { after: new Date() } }}
+                                        formatDate={formatDate}
+                                        onDayChange={this.handleDayChange}
+                                        onChange={this.handleChange}
+                                        value={this.state.child.birthday} />
+                                </div>
 
-                    </div>
-                </form>
+                                <div className="errorMsg">{this.state.errors.birthday}</div>
+                            </div>
+                            <div className="col s2">
+                                <div className="input-field">
+                                    <button className="btn waves-effect waves-light cyan lighten-1" >Add child</button>
+                                    {register}
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
 
 
+                </div>
             </div>
-
         )
     }
 }
