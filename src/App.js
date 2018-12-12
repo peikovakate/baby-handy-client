@@ -9,6 +9,7 @@ import Home from './_components/Home'
 import About from './_components/About'
 import { AddChild } from './_components/AddChild'
 import { ChildList }  from './_components/ChildList'
+import Baby from './_components/Baby';
 
 
 class App extends Component {
@@ -34,7 +35,9 @@ class App extends Component {
             { alert.message &&
               <div className='card-panel'>{alert.message}</div>
             }
+           
             <main>
+            <Baby/>
               <Switch>
                 <Route exact path='/' component={Home}/>
                 <Route path='/about' component={About}/>
@@ -44,6 +47,7 @@ class App extends Component {
                 <PrivateRoute path='/childlist' component={ChildList}/>
               </Switch>
             </main>
+            
         </div>
         </div>
       </Router>
