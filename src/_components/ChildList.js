@@ -51,9 +51,14 @@ class ChildList extends Component {
         return (
             <div className="container">
                 <div className="row">
+                    {!this.props['user'].user.children.length>0 && 
+                        <div className='card' style={{marginTop:20, padding: 20 }}>
+                            You don't have any child registered. 
+                            Please, add them <a href='/addchild'>here</a>.
+                        </div>
+                        }
                     <div class="col s12 cards-container">
                         {this.props['user'].user.children.map(children =>
-                         
                             <div className='card' 
                                 style={{ margin: 20 }} 
                                 key={children.child_id} 
