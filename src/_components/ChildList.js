@@ -60,8 +60,11 @@ class ChildList extends Component {
                         <div className='card' style={{marginTop:20, padding: 20 }}>
                             You don't have any child registered. 
                             Please, add them <a href='/#' onClick={this.handleClickOnLink}>here</a>.
-                        </div>
-                        }
+                        </div>}
+                    {this.props['user'].user.children.length>0 && 
+                        <div className='card' style={{margin:30, padding: 20 }}>
+                            To have a chat about one of your children click "Start conversation" button. 
+                        </div>}
                     <div class="col s12 cards-container">
                         {this.props['user'].user.children.map(children =>
                             <div className='card' 
